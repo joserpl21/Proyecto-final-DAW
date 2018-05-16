@@ -1,0 +1,5 @@
+name = Formulario para enviar mensajes
+description = "Envia mensaje a los usuarios"
+core = 7.x
+version = "7.x-1.2"
+

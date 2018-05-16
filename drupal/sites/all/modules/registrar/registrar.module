@@ -1,0 +1,86 @@
+<?php 
+function registrar_user_login(&$edit, $account) {
+	 $_GET['destination'] = 'user/registro-de-actividades';
+}
+function registrar_menu() {
+
+$items = array();
+
+$items['registrar/mensaje'] = array(
+
+'title' => 'Configuracion de registro',
+
+
+'page callback' => 'registrar_actividad',
+ 'access callback' => TRUE,
+
+
+ );
+
+return $items; }
+
+function registrar_actividad(){
+	
+	$titulo=$_POST['nombre'];
+	$fecha=$_POST['fecha'];
+	$caloria=$_POST['cal'];
+	$actividad=$_POST['actividad'];
+	$tipo_actividad=$_POST['tipo_actividad'];
+	$usuario=$_POST['usuario'];
+	
+		$duracion=$_POST['duracion'];
+	$url=$_POST['ruta'];
+	
+	$resultado=db_query("INSERT INTO `registro`(`nombre_usuario`, `fecha`, `nombre_actividad`, `cal`, `duracion`, `actividad`, `tipo_actividad`) 
+	VALUES (:nombre,:fecha,:titulo,:caloria,:duracion,:actividad,:tipo_actividad)",array(':nombre'=>$usuario,
+	':fecha'=>$fecha , ':titulo' => $titulo ,':caloria' =>$caloria,':duracion'=>$duracion ,':actividad' => $actividad,
+	':tipo_actividad'=>$tipo_actividad));
+	
+	if($resultado){
+		
+		$url=$url."?dato=bien";
+		header("Location:http://jjml.xyz$url");
+	
+	}else{
+		drupal_get_messages('Registro Incorrecto');;		
+	}
+	
+	
+}
+
+
+function registrar_permission() {
+
+return array(
+
+'administer registrar settings' => array(
+
+'title' => t('Administer registrar configurations'),
+
+'restrict access' => true)
+
+);
+
+}
+/**
+* Formulario de configuración
+*
+* @return array The form structure.
+*/
+function registrar_admin() {
+$form = array();
+
+// Algo que configurar
+$form['registrar_something'] = array(
+'#type' => 'textfield',
+'#title' => t('Something'),
+'#default_value' => variable_get(‘registrar_something’, ""),
+'#size' => 60,
+'#maxlength' => 250,
+'#description' => t("Something"),
+'#required' => TRUE,
+);
+
+return system_settings_form($form);
+}
+?>

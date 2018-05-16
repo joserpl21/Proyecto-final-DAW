@@ -1,0 +1,34 @@
+name = Efor - Sitio Base
+description = Sitio Web B&aacute;sico con configuraci&oacute;n l&iacute;mpia y plantilla personalizada.
+version = VERSION
+core = 7.x
+dependencies[] = block
+dependencies[] = contextual
+dependencies[] = help
+dependencies[] = image
+dependencies[] = list
+dependencies[] = menu
+dependencies[] = number
+dependencies[] = options
+dependencies[] = path
+dependencies[] = rdf
+dependencies[] = dblog
+dependencies[] = toolbar
+dependencies[] = overlay
+dependencies[] = field_ui
+dependencies[] = file
+dependencies[] = backup_migrate
+dependencies[] = l10n_update
+dependencies[] = jquery_update
+dependencies[] = libraries
+dependencies[] = less
+dependencies[] = token
+dependencies[] = pathauto
+dependencies[] = transliteration
+dependencies[] = webform
+
+; Information added by drupal.org packaging script on 2013-04-03
+version = "7.26"
+project = "drupal"
+datestamp = "1365027012"
+

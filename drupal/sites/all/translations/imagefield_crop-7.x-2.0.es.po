@@ -1,0 +1,28 @@
+# Spanish translation of Imagefield Crop (7.x-2.0)
+# Copyright (c) 2014 by the Spanish translation team
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Imagefield Crop (7.x-2.0)\n"
+"POT-Creation-Date: 2014-10-10 02:01+0000\n"
+"PO-Revision-Date: YYYY-mm-DD HH:MM+ZZZZ\n"
+"Language-Team: Spanish\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n!=1);\n"
+
+msgid "None."
+msgstr "Ninguno/a."
+msgid "Image crop"
+msgstr "Recortar imagen"
+msgid "pixels"
+msgstr "píxeles"
+msgid "The image is too small; the minimum dimensions are %dimensions pixels."
+msgstr ""
+"La imagen es demasiado pequeña. Las dimensiones mínimas son "
+"%dimensions píxeles."
+msgid "This field stores the ID of an image file as an integer value."
+msgstr ""
+"Este campo almacena el ID de un archivo de imagen como un valor de "
+"número entero."

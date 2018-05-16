@@ -1,0 +1,88 @@
+<?php 
+
+function mensaje_menu() {
+$items['mensaje/form1'] = array(
+'title' => t('Enviar mensaje'),
+'page callback' => 'drupal_get_form',
+'page arguments' => array('mensaje_form1'),
+'access callback' => TRUE,
+'description' => t('Segunda fase'),
+'type' => MENU_CALLBACK,
+);
+return $items;
+}
+
+
+function mensaje_form1($form_state) {
+
+Global $user;
+
+$form['destinatario'] = array(
+'#type' => 'textfield',
+'#title' => t('Ingrese nombre de usuario'),
+'#default_value' => variable_get('destinatario'),
+'#element_validate' => array('dest_validate')
+);
+
+
+$form['mensaje'] = array(
+'#type' => 'textarea',
+'#title' => t('Mensaje'),
+'#default_value' => variable_get('mensaje'),
+'#description' => t('Seleccionar actividad'),
+'#required'=>true
+);
+$nombre = $user->name;
+$form['emisor'] = array(
+'#type' => 'hidden',
+'#title' => t('nombre'),
+'#value'=>$nombre,
+);
+$fecha=  date("Y-m-d h:i:s");
+$form['fecha'] = array(
+'#type' => 'hidden',
+'#title' => t('fecha'),
+'#value'=>$fecha,
+);
+$form['submit'] = array(
+'#type' => 'submit',
+'#value' => 'Enviar',
+);
+return $form;
+}
+
+function dest_validate($element, &$form_state, $form) {
+  $value = $element['#value'];
+
+  $existe = db_query("SELECT uid FROM `users` where name=:name", array(':name'=>$value))->fetchField();
+  if(!$existe){
+  	form_error($element, t('No existe usuario con ese nombre.'));
+  }
+}
+
+function mensaje_form1_submit($form, &$form_state){
+	variable_set('destinatario', $form_state['values']['destinatario']);
+	//variable_set('correo', $form_state['values']['correo']);
+	variable_set('mensaje', $form_state['values']['mensaje']);
+
+
+
+
+	$actualizar=db_query("INSERT INTO mensajes(emisor, receptor, mensaje,fecha) VALUES (:emisor,:receptor,:mensaje,:fecha)",array(':emisor'=> $form_state['values']['emisor'],':receptor'=>$form_state['values']['destinatario'],':mensaje' => $form_state['values']['mensaje'],':fecha'=>$form_state['values']['fecha']));
+	
+if($actualizar->rowCount()>0){
+	drupal_set_message('Datos actualizados correctamente'); 
+}else{
+form_error(t('Error'));	
+}
+          //$form_state['redirect'] = 'content/tus-eventos-son';
+          
+}
+
+
+
+
+
+
+
+?>

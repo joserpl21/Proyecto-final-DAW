@@ -1,0 +1,28 @@
+# Spanish translation of Media crop (7.x-1.4)
+# Copyright (c) 2014 by the Spanish translation team
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Media crop (7.x-1.4)\n"
+"POT-Creation-Date: 2014-01-27 00:15+0000\n"
+"PO-Revision-Date: YYYY-mm-DD HH:MM+ZZZZ\n"
+"Language-Team: Spanish\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n!=1);\n"
+
+msgid "None"
+msgstr "Ninguno"
+msgid "Change"
+msgstr "Cambiar"
+msgid "Unable to generate the derived image located at %path."
+msgstr "No se pudo generar la imagen derivada ubicada en %path."
+msgid "Failed to create style directory: %directory"
+msgstr "No se pudo crear el directorio de estilo: %directory"
+msgid ""
+"Cached image file %destination already exists. There may be an issue "
+"with your rewrite configuration."
+msgstr ""
+"El archivo de imagen en caché %destination ya existe. Puede haber un "
+"problema con su configuración de reescritura."

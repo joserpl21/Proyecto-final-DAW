@@ -1,0 +1,26 @@
+# Spanish translation of Easy Breadcrumb (7.x-2.15)
+# Copyright (c) 2018 by the Spanish translation team
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Easy Breadcrumb (7.x-2.15)\n"
+"POT-Creation-Date: 2018-03-24 13:44+0000\n"
+"PO-Revision-Date: YYYY-mm-DD HH:MM+ZZZZ\n"
+"Language-Team: Spanish\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n!=1);\n"
+
+msgid "Home"
+msgstr "Inicio"
+msgid "User interface"
+msgstr "Interfaz de usuario"
+msgid "None"
+msgstr "Ninguno"
+msgid "General settings"
+msgstr "Ajustes generales"
+msgid "Save"
+msgstr "Guardar"
+msgid "Path settings"
+msgstr "Configuración de ruta"

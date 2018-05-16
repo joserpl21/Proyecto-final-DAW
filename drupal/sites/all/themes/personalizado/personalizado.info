@@ -1,0 +1,28 @@
+name = Personalizado
+description = Tema personalizado para el sitio web basado en Bootstrap
+core = 7.x
+base theme = bootstrap
+
+; Regions
+regions[navigation]     = 'Navigation'
+regions[header]         = 'Top Bar'
+regions[highlighted]    = 'Highlighted'
+regions[help]           = 'Help'
+regions[premain]        = 'Pre contenido'
+regions[sidebar_first]  = 'Primary'
+regions[content]        = 'Content'
+regions[sidebar_second] = 'Secondary'
+regions[submain]        = 'Sub contenido'
+regions[footer]         = 'Footer'
+
+; Stylesheets
+stylesheets[all][] = bootstrap/css/bootstrap.min.css
+stylesheets[all][] = bootstrap/css/bootstrap-theme.min.css
+stylesheets[all][] = css/default.css
+stylesheets[all][] = css/style.less
+
+; Scripts
+scripts[] = 'bootstrap/js/bootstrap.min.js'
+scripts[] = 'js/funciones.js'
+
+settings[bootstrap_cdn] = '';
