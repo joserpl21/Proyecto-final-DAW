@@ -1,6 +1,6 @@
 <?php 
 function registrar_user_login(&$edit, $account) {
-	 $_GET['destination'] = 'user/registro-de-actividades';
+	 $_GET['destination'] = 'cuenta';
 }
 function registrar_menu() {
 

@@ -19,6 +19,17 @@
       <?php print $submitted; ?>
     </div>
   <?php endif; ?>
+ <?php 
+   if(user_is_logged_in()){
+     global $user;
+    $usuario = $user->name; 
+     }
+    $nid=$node->nid;
+    $estre=db_query("SELECT field_calificacion_value FROM `field_data_field_calificacion` WHERE entity_id=:nid",array(':nid'=>$nid))->fetchField();
+    $totVotos=db_query("SELECT COUNT(*) FROM `valoracion` where cod_act=:nid GROUP by cod_act",array(':nid'=>$nid))->fetchField();
+    $tipo="comida";
+     ?> 
+
 
   <div class="content clearfix"<?php print $content_attributes; ?>>
     <?php
@@ -30,22 +41,95 @@
       print render($content);
 
 
-
     ?>
+    
+    <!--<?php foreach ($node->field_imagen['und'] as $fotos) { 
+                                   
+                                ?>
+                                <div class="col-xs-4 col-md-4">
+                                    <a href="<?php print image_style_url('ampliada', $fotos['uri']) ?>"  title="<?php print $fotos['title'] ?>" rel="shadowbox[<?php print $title; ?>]">
+                                        <img src='<?php print image_style_url('detalle-miniatura', $fotos['uri']) ?>' alt="<?php print $fotos['alt'] ?>" title="<?php print $fotos['title'] ?>" class="img-responsive" />
+                                    </a>
+                                </div>
+                            <?php } ?>
+                            -->
+  <div id="val">
+
+ <?php if(isset($estre)){?>
+
+  <form  method="POST" action="http://jjml.xyz/drupal/valorar/valor">
+  <h2>Califica la comida:</h2>   
+   <p class="clasificacion">
+      <input id="radio1" type="radio" name="estrellas" value="5" <?php if($estre==5){print "checked";}?>  onclick="enviarEstrellas(jQuery('#radio1').val())" <?php if(!user_is_logged_in()){ print "disabled";} ?>><!--
+    --><label for="radio1">★</label><!--
+    --><input id="radio2" type="radio" name="estrellas" value="4" <?php if($estre==4){print "checked";}?>  onclick="enviarEstrellas(jQuery('#radio2').val())" <?php if(!user_is_logged_in()){ print "disabled";} ?>><!--
+    --><label for="radio2">★</label><!--
+    --><input id="radio3" type="radio" name="estrellas" value="3" <?php if($estre==3){print "checked";}?>  onclick="enviarEstrellas(jQuery('#radio3').val())" <?php if(!user_is_logged_in()){ print "disabled";} ?>><!--
+    --><label for="radio3">★</label><!--
+    --><input id="radio4" type="radio" name="estrellas" value="2" <?php if($estre==2){print "checked";}?>  onclick="enviarEstrellas(jQuery('#radio4').val())" <?php if(!user_is_logged_in()){ print "disabled";} ?>><!--
+    --><label for="radio4">★</label><!--
+    --><input id="radio5" type="radio" name="estrellas" value="1" <?php if($estre==1){print "checked";}?>  onclick="enviarEstrellas(jQuery('#radio5').val())" <?php if(!user_is_logged_in()){ print "disabled";} ?>><!--
+    --><label for="radio5">★</label>
+   
+  </p>
+
+  <br />
+
+ 
+    
+</form>
+
+</div>
+<label style="float: left; clear: both;"><?php print "Total de votos ". $totVotos; ?></label>
+<?php }?>
+
+<script>
+  jQuery(document).ready(function($) { 
+jQuery("#mensaje").hide();
+jQuery("#mensaje2").hide();
+});
+function enviarEstrellas(valor){
+    <?php if(user_is_logged_in()){?>
+    var parametros ={
+      "valor":valor,
+      "nid": <?php print $nid;?>,
+      "tipo": "comida",
+      "uid": "<?php print $usuario ;?>",
+    }; 
+    jQuery("#mensaje").show();
+    document.getElementById("mensaje").innerHTML = "Gracias por su valoracion!";
+    
+       jQuery.ajax({
+                data:  parametros, //datos que se envian a traves de ajax
+                url:   'http://jjml.xyz/drupal/valorar/valor', //archivo que recibe la peticion
+                type:  'post'
+              });
+     <?php } ?>
+    
+  
+  }
+  <?php if(!user_is_logged_in()){?>
+      jQuery(".clasificacion").click(function() {
+        jQuery("#mensaje2").show();
+     document.getElementById("mensaje2").innerHTML = "Registrese para valorar";
+    });
+    <?php } ?>
+</script>
+
 	<?php 
 
 	if(user_is_logged_in()){?>
-    <form method="POST" action="http://jjml.xyz/drupal/registrar/mensaje">
+    <form method="POST" action="http://jjml.xyz/drupal/registrar/mensaje" style="clear: both; float: left">
     	<?php 
-		global $user;
-		$usuario = $user->name;
+	
 		
 		$term=sacarTipoComida($node->nid);
     	$fecha= date("Y-m-d h:i:s");
     	$cal= $node->field_calorias['und'][0]['value'];
 
     ?>	
-    <h2><?php print $term; ?></h2>
+
+    
 	<input type="hidden" name="usuario" value="<?php print $usuario;?>">
 		<input type="hidden" name="fecha" value="<?php print $fecha;?>">
 		<input type="hidden" name="ruta" value="<?php print $node_url;?>">
@@ -56,9 +140,13 @@
 		<input type="hidden" name="tipo_actividad" value="<?php print $term;?>">
     	<input type="submit" name="registrar" value="Registrar" class="btn btn-success">
     </form>
+
+   
 	<?php }?>
   </div>
-
+  <br />
+   <h3 id="mensaje" class="alert alert-success"></h3>
+<h3 id="mensaje2" class="alert alert-warning"></h3>
   <?php
     // Remove the "Add new comment" link on the teaser page or if the comment
     // form is being displayed on the same page.

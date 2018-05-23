@@ -14,7 +14,19 @@ return $items;
 
 
 function mensaje_form1($form_state) {
-
+	/**if(isset($_POST['accion'])){
+		$fecha
+switch ($_POST['accion']) {
+	case 'Contestar':
+		# code...
+		break;
+	case 'Borrar':
+		$borrar=db_query("DELETE FROM `mensajes` WHERE fecha=:fecha",array(':fecha',$fecha));
+		break;
+	default:
+		# code...
+		break;
+}}**/
 Global $user;
 
 $form['destinatario'] = array(

@@ -1,0 +1,54 @@
+<?php 
+
+function valorar_menu() {
+
+$items = array();
+
+$items['valorar/valor'] = array(
+
+'title' => 'Valoracion actividad',
+'page callback' => 'valorar_actividad',
+ 'access callback' => TRUE,
+
+ );
+
+return $items; }
+
+function valorar_actividad(){
+	$valor= $_POST['valor'];
+	$nid =$_POST['nid'];
+	$tipo= $_POST['tipo'];
+	$usuario= $_POST['uid'];
+	$votado=db_query("SELECT valoracion  FROM `valoracion` where nid=:nid and cod_act=:act",array(':nid'=>$usuario,':act'=>$nid))->fetchField();
+	if(!$votado){
+		$hacerValoracion=db_query("INSERT INTO `valoracion`(`tipo`, `nid`, `cod_act`, `valoracion`) VALUES (:tipo,:nid,:cod_act,:val)",array(':tipo'=>$tipo,':nid'=>$usuario, ':cod_act'=>$nid,':val'=>$valor));
+	}else{
+		$hacerValoracion=db_query("UPDATE `valoracion` SET `valoracion`=:val where nid=:nid and cod_act=:act",array(':val'=>$valor,':nid'=>$usuario, ':act'=>$nid));
+	}
+
+	$valores=db_query("SELECT valoracion FROM `valoracion` where cod_act=:act",array('act'=>$nid))->fetchCol();
+	$total=0;
+	$i=0;
+	watchdog('valor',$valores);
+	foreach ($valores as $valor) {
+		
+		$i++;
+		$total=$total+$valor;
+	}
+	$va=round($total/$i);
+	//$tiene=db_query("SELECT field_calificacion_value FROM `field_data_field_calificacion` where entity_id=:id",array(':id'=>$nid))->fetchField();
+	//if($tiene){
+	$act=db_query("UPDATE `field_data_field_calificacion` SET `field_calificacion_value`=:va WHERE entity_id=:nid",array(':va'=>$va,':nid'=>$nid));
+	
+	
+	//$final = ($valor + $v)/2;
+	
+	//$result=db_query("UPDATE field_data_field_calificacion SET field_calificacion_value=:val WHERE revision_id=:id",array(':val'=>$final,':id'=>$nid))->fetchField();
+	
+	//return "La valoraciones " . $valor;
+	
+	
+}
+
+
+?>

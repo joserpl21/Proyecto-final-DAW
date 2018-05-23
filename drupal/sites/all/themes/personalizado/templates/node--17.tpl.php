@@ -41,6 +41,7 @@
  
    print "<table class='table'>
       <tr><td>Emisor</td><td></td><td>receptor</td><td></td><td>Mensaje</td><td></td><td>fecha</td></tr>";
+       print "<form method='POST' action=''>";
       foreach ($misMensajes as $mensaje => $mensa) {       
         print "<tr>";
         foreach ($mensa as $se => $e) {
@@ -48,7 +49,8 @@
             print "<td>$e<td>";
           }
         }
-        print "</tr>";
+        print "<td><input type='submit'name='accion' value='Contestar'></td><td><input type='submit'name='accion' value='Borrar'></td></tr>";
+        print "</form>";
       }
       
       print "</table>";

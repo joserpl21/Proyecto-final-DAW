@@ -46,9 +46,7 @@
     <span class="sr-only">Siguiente</span>
 </a>
 </div>
-    <?php $nombre = db_query("SELECT * FROM `registro` where nombre_usuario='joel'")->fetchField();
-    print $nombre;
-    ?>
+   
 
     <?php print render($title_prefix); ?>
   <?php if (!$page): ?>

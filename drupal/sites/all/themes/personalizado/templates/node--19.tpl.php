@@ -1,9 +1,6 @@
-<div id="node-<?php print $node->nid; ?>" class="<?php print $classes; ?> clearfix"<?php print $attributes; ?>>
+<div id="node-<?php print $node->nid; ?>" class="<?php print $classes; ?> clearfix"<?php print $attributes; ?> style="margin-top: 2%;">
    <?php
-   
-   if(isset($_GET['dato'])){
-	  drupal_set_message("Dato guardado correctamente");
-   }	
+
 	?>
     <?php print render($title_prefix); ?>
   <?php if (!$page): ?>
@@ -31,13 +28,81 @@
       hide($content);
       
     ?>
-    <ul>
-      <li><a href="<?php print url('/tipo-de-comidas/comidas-omnivoro'); ?>">Omnivoro</a></li>
-      <li><a href="<?php print url('/tipo-de-comidas/comidas-veganas'); ?>">Vegano</a></li>
-      <li><a href="<?php print url('/tipo-de-comidas/comidas-vegetarianas'); ?>">Vegetariana</a></li>
+	<?php if(isset($node->field_image['und'][0])) {?>
+  <div id="cont" class="container">
+  <div class="row">
+    <div class="col-sm-6" >
+      <img class="img-thumbnail" src="<?php print image_style_url("large",$node->field_image['und'][0]['uri']) ?>" alt="Comidas Omnivoras" />
+		<div class="middle">
+    <div class="text"><a href="<?php print url('/tipo-de-comidas/comidas-omnivoro'); ?>">Omnivoras</a></div>
+  </div>
+	</div>
+    <div class="col-sm-6" >
+      <img class="img-thumbnail" src="<?php print image_style_url("large",$node->field_image['und'][1]['uri']) ?>" alt="Comidas Veganas" />
+    <div class="middle">
+    <div class="text"><a href="<?php print url('/tipo-de-comidas/comidas-veganas'); ?>">Veganas</a></div>
+  </div>
+	</div>
+  </div>
+   <div class="row">
+    <div class="col-sm-12" >
+	 <div class="center-block" style="text-align:center;" >
+		<img class="img-thumbnail" src="<?php print image_style_url("large",$node->field_image['und'][2]['uri']) ?>" alt="Comidas Vegetarianas" />
+	 </div>
+    <div class="middle">
+    <div class="text"><a href="<?php print url('/tipo-de-comidas/comidas-vegetarianas'); ?>">Vegetarianas</a></div>
+		</div>
+	</div>
+  </div>
+  
+  <style>
+  #cont img:hover{
+	   opacity: 0.5;
+  }
+  #cont  img {
+  opacity: 1;
+  
+  height: auto;
+  transition: .5s ease;
+  backface-visibility: hidden;
+	}
+	
+  #cont {
+    position: relative;
+  
+}
+#cont div div:hover .middle {
+  opacity: 1;
+}
+.middle {
+  transition: .5s ease;
+  opacity: 0;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  text-align: center;
+}
+.middle a {
+color:white;	
+}
+.text {
+  background-color: #4CAF50;
+  color: white;
+  font-size: 16px;
+  padding: 16px 32px;
+}
+  </style>
+</div>
       
-    </ul>
-
+      
+     
+		
+		
+      
+   
+	<?php }?>
   </div>
 
   <?php

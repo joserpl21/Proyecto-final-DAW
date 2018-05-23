@@ -1,0 +1,84 @@
+/*  Estilos globales 									    ----------------------------------------------------------------------------------------------------------------------  */
+body {
+  font-size: 22px;
+  line-height: 24px;
+  font-family: Arial;
+  color: #333333;
+  background: #fff;
+  padding: 0px;
+}
+a {
+  color: #005192;
+  transition: color 0.5s ease;
+}
+a:hover {
+  color: #333333;
+  text-decoration: none;
+}
+a:link {
+  color: #005192;
+  text-decoration: none;
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  margin: 0px;
+  line-height: inherit;
+  font-weight: normal;
+}
+#toolbar {
+  box-shadow: none;
+  position: relative;
+  margin: 0px;
+  padding: 0px;
+}
+body.toolbar-drawer {
+  padding-top: 0px !important;
+}
+.nav {
+  margin: 0px;
+}
+/*  Header			  									    ----------------------------------------------------------------------------------------------------------------------  */
+/*  Main			  									    ----------------------------------------------------------------------------------------------------------------------  */
+/*  Footer			  									    ----------------------------------------------------------------------------------------------------------------------  */
+.easy-breadcrumb {
+  text-align: center;
+}
+input[type="radio"] {
+  display: none;
+}
+label {
+  color: grey;
+}
+#form {
+  width: 250px;
+  margin: 0 auto;
+  height: 50px;
+}
+#form p {
+  text-align: center;
+}
+.clasificacion label {
+  font-size: 60px !importand;
+}
+input[type="radio"] {
+  display: none;
+}
+label {
+  color: grey;
+}
+.clasificacion {
+  direction: rtl;
+  unicode-bidi: bidi-override;
+  float: left;
+}
+label:hover,
+label:hover ~ label {
+  color: orange;
+}
+input[type="radio"]:checked ~ label {
+  color: orange;
+}

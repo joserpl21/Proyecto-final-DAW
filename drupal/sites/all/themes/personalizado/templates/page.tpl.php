@@ -2,7 +2,7 @@
     <div class="container">
         <?php if ($logo): ?>
             <a href="<?php print $front_page; ?>" title="<?php print t('Home'); ?>">
-                <img src="<?php print $logo; ?>" alt="<?php print t('Home'); ?>" title="<?php print t('Home'); ?>" />
+                <img src="<?php print(base_path())?>sites/all/themes/personalizado/logo2.png" alt="<?php print t('Home'); ?>" title="<?php print t('Home'); ?>" />
             </a>
         <?php endif; ?>
         <?php if (!empty($site_name)): ?>
@@ -14,29 +14,32 @@
         <?php if (!empty($page['header'])): ?>
             <?php print render($page['header']); ?>
         <?php endif; ?>
-    </div>
+    
 </header>
-
-<nav class="navbar">
-    <div class="container">
-        <div class="navbar-header">
-            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-        </div>
-        <?php if (!empty($primary_nav)): ?>
+<div class="container">
+<nav class="navbar navbar-default">
+  
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>                        
+      </button>
+    
+   <?php if (!empty($primary_nav)): ?>
             <div class="navbar-collapse collapse">
                 <?php if (!empty($primary_nav)): ?>
                     <?php print render($primary_nav); ?>
                 <?php endif; ?>
+         
             </div>
         <?php endif; ?>
-    </div>
+  </div>
 </nav>
-
+  </div>
+ 
+    
+        
 <?php if (!empty($page['premain'])): ?>
     <?php print render($page['premain']); ?>
 <?php endif; ?>
@@ -82,6 +85,23 @@
         </div>
     </div>
 </main>
+<script type="text/javascript">
+    jQuery(document).ready(function($) { 
+        $(".progress").hide();
+           $("#edit-locale").hide();
+            $("#edit-contact").hide();
+            $("#edit-timezone").hide();
+            $(".help-block").hide();
+            $(".password-help").hide();
+            $("label[for='edit-pass']").hide();
+            $(".panel-body").hide();
+           if(!(".view").length){
+            $(".btn-success").hide();
+            }else{
+                $(".btn-success").show();
+            }          
+      });
+</script>
 
 <?php if (!empty($page['submain'])): ?>
     <?php print render($page['submain']); ?>

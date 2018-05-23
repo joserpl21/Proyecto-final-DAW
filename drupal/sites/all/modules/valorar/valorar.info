@@ -1,0 +1,9 @@
+name = "Valorar"
+description = "Registra la valoracion de los usuarios de una actividad"
+core = 7.x
+
+version = "7.x-2.10"
+core = "7.x"
+project = "Regisgtrar"
+datestamp = "1461011641"
+
