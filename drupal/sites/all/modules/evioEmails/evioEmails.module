@@ -1,0 +1,198 @@
+<?php
+class EforMailSystem implements MailSystemInterface {
+  /**
+   * 
+   *
+   * @param array $message
+   *   A message array, as described in hook_mail_alter().
+   *
+   * @return array
+   *   The formatted $message.
+   */
+  public function format(array $message) {
+    $message['body'] = implode("\n\n", $message['body']);
+    return $message;
+  }
+
+  /**
+   * Send an e-mail message, using Drupal variables and default settings.
+   *
+   * @see http://php.net/manual/en/function.mail.php
+   * @see drupal_mail()
+   *
+   * @param array $message
+   *   A message array, as described in hook_mail_alter().
+   *
+   * @return bool
+   *   TRUE if the mail was successfully accepted, otherwise FALSE.
+   */
+  public function mail(array $message) {
+    $mimeheaders = array();
+    foreach ($message['headers'] as $name => $value) {
+      $mimeheaders[] = $name . ': ' . mime_header_encode($value);
+    }
+    $line_endings = variable_get('mail_line_endings', MAIL_LINE_ENDINGS);
+    $result =  mail(
+      $message['to'],
+      mime_header_encode($message['subject']),
+      // Note: e-mail uses CRLF for line-endings. PHP's API requires LF
+      // on Unix and CRLF on Windows. Drupal automatically guesses the
+      // line-ending format appropriate for your system. If you need to
+      // override this, adjust $conf['mail_line_endings'] in settings.php.
+      preg_replace('@\r?\n@', $line_endings, $message['body']),
+      // For headers, PHP's API suggests that we use CRLF normally,
+      // but some MTAs incorrectly replace LF with CRLF. See #234403.
+      implode("\n", $mimeheaders)
+    );
+    return $result;
+  }
+}
+
+/**
+ * Implements hook_menu().
+ */
+function efor_moduloenvioemails_menu() {
+		$items = array();
+		$items['efor_moduloenvioemails/formemail'] = array(
+			'title' => t('Enviar email'),
+			'page callback' => 'drupal_get_form',
+			'page arguments' => array('form_emails'),
+			'access arguments' => array('access content'),
+			'description' => t('Enviar email'),
+			'type' => MENU_CALLBACK,
+		);
+		return $items;
+}
+
+/**
+ * Returns the render array for the form.
+ */
+function form_emails($form, &$form_state) {
+		$salto = chr(13).chr(10);
+		$arrayNodos = [];
+		$nodosjuntos = $_GET['nodos'];
+		$nodo = explode(",", $nodosjuntos);
+		foreach($nodo as $n){
+		array_push($arrayNodos,node_load($n));
+			
+		}
+	
+	
+			
+	
+  $form['destinatarios'] = array(
+    '#type' => 'textarea',
+    '#title' => t('Va a enviar un email a los siguientes destinatarios'),
+    '#collapsible' => TRUE,
+    '#collapsed' => FALSE,
+	'#value' => '',
+	'#disabled'=>TRUE,
+	
+  );
+  
+  //cambiar cuando esten generados los tipos de emial
+	$arrayemails = array(
+			 "Alta",
+			 "tipo 2",
+			 "tipo 3",
+			 "tipo 4",
+		);
+ $form['tipoEmail'] = array(
+		'#type' => 'select',
+		'#title' => t('Elige el tipo de email'),
+		'#default_value' => '',
+		'#options' => $arrayemails,
+		'#description' => t('Seleccione el tipo de email'),
+	);
+			
+		foreach($arrayNodos as $a){				
+					$form['destinatarios']['#value'] = 	$form['destinatarios']['#value'].$a->field_email['und'][0]['value'].$salto;
+			}
+
+
+
+	$form['submit'] = array(
+		'#type' => 'submit',
+		'#value' => t('Submit'),
+	);
+
+	
+	
+	
+	$form['saved_value_1'] = array(
+    '#type' => 'value',
+	'#value' => $arrayNodos
+	);
+	
+  return $form;
+}
+
+
+/**
+ * Add a submit handler/function to the form.
+ *
+ * This will add a completion message to the screen when the
+ * form successfully processes
+ */
+function form_emails_submit($form, &$form_state) {
+	$arrayNodos = $form['saved_value_1']['#value'];
+	$form['saved_value_1'] = array('#type' => 'value','#value' => $arrayNodos);	
+	$mail_notif = 'iserrano@efor.es';
+	$email_from = 'eformedia@efor.es';
+	$tipoEmail = $form_state['input']['tipoEmail'];
+	$params_email = $arrayNodos;		
+	
+
+		
+	
+	switch($tipoEmail){
+	case 0: //alta
+		//drupal_mail($module, $key, $to, $language, $params = array(), $from = NULL, $send = TRUE)
+		$sent_info = drupal_mail('efor_moduloenvioemails', 'alta', $mail_notif, language_default(), $params_email,$email_from, TRUE);
+	break;
+  }
+	
+	//watchdog("tipoEmail", '<pre>' . print_r($form_state['input']['tipoEmail'], true) . '</pre>'); 		
+	//watchdog("form", '<pre>' . print_r( $form, true) . '</pre>'); 
+	//watchdog("node", '<pre>' . print_r( $node, true) . '</pre>'); 		
+
+  drupal_set_message(t('The form has been submitted.'));
+}
+
+function efor_moduloenvioemails_mail($key, &$message, $params){
+	watchdog("params", '<pre>' . print_r($params, true) . '</pre>'); 
+	$arrayNodos = $params;
+	
+		foreach($arrayNodos as $a){	
+
+		if($key == 'alta'){
+		$message['subject'] = 'Gracias por registrarte';
+		$message['headers']['Content-Type'] = 'text/html; charset=UTF-8; format=flowed; delsp=yes';		
+		$mail_html = file_get_contents(DRUPAL_ROOT.'/sites/all/modules/efor_moduloenvioemails/ejemplo.html');
+		
+		$mail_html1=str_replace("field_url",$a->field_url['und'][0]['value'],$mail_html);
+		$mail_html1=str_replace("field_email",$a->field_url['und'][0]['value'],$mail_html1); 
+		$mail_html1=str_replace("field_servicio_contratado",$a->field_servicio_contratado['und'][0]['value'],$mail_html1);
+		$mail_html1=str_replace("field_fecha_de_servicio",date("d-m-Y",strtotime($a->field_fecha_de_servicio['und'][0]['value'])),$mail_html1);	
+		$mail_html1=str_replace("field_res_ata",$a->field_res_ata['und'][0]['value'],$mail_html1);
+		$actunuc = $a->field_act_nuc['und'][0]['value'];
+		if($actunuc>5){$actunuc='infinitas';}
+		$mail_html1=str_replace("field_act_nuc",$actunuc,$mail_html1);
+		$mail_html1=str_replace("field_act_mod",$a->field_act_mod['und'][0]['value'],$mail_html1);
+		$mail_html1=str_replace("field_informes",$a->field_informes['und'][0]['value'],$mail_html1);
+		watchdog("params", '<pre>' . print_r($mail_html1, true) . '</pre>');
+		$message['body'][]=$mail_html1;	
+		
+		
+		
+		$fp = fopen("sites/all/modules/efor_moduloenvioemails/ejemplo1.html", "w") or die("Unable to open file!");
+		fwrite($fp, $mail_html1);
+		fclose($fp);
+		drupal_goto('sites/all/modules/efor_moduloenvioemails/ejemplo1.html');
+		
+	}
+		}
+
+
+}
+

@@ -87,6 +87,10 @@
 </main>
 <script type="text/javascript">
     jQuery(document).ready(function($) { 
+        $("#volver").click(function(){
+           var url = "www.google.com"; 
+            $(location).attr('href',url);
+        });
         $(".progress").hide();
            $("#edit-locale").hide();
             $("#edit-contact").hide();
@@ -94,7 +98,14 @@
             $(".help-block").hide();
             $(".password-help").hide();
             $("label[for='edit-pass']").hide();
-            $(".panel-body").hide();
+            $(".form-item-field-part-und-0-value").hide();
+            $(".tabledrag-toggle-weight").hide();
+            //if($(".easy-breadcrumb_segment").val()="Node"){
+             //   $(".easy-breadcrumb_segment").hide();
+            //}
+            //$(".easy-breadcrumb_segment-1").val();
+            //var pruba=jQuery('.easy-breadcrumb_segment-1').val();
+            //alert($("a .easy-breadcrumb_segment-1").val());
            if(!(".view").length){
             $(".btn-success").hide();
             }else{

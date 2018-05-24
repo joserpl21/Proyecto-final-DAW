@@ -38,32 +38,106 @@
   global $user;
   $nombre=$user->name;
   $misMensajes=db_query("SELECT * FROM `mensajes` where receptor=:nombre",array(':nombre'=>$nombre))->fetchAll();
- 
+  if(isset($_GET['borrar'])){
+    print "<div class='alert alert-info'>Mensaje borrado</div>";
+  }
+  if(isset($_GET['enviado'])){
+    print "<div class='alert alert-info'>Mensaje enviado</div>";
+  }
+  if(isset($misMensajes) && !empty($misMensajes)){
+    print "<button type='button' class='btn btn-info' data-toggle='collapse' data-target='#com'>Buson de entrada</button>";
+      print "<div id='com' class='collapse'>";
    print "<table class='table'>
-      <tr><td>Emisor</td><td></td><td>receptor</td><td></td><td>Mensaje</td><td></td><td>fecha</td></tr>";
-       print "<form method='POST' action=''>";
+      <tr><td>De</td></td><td>Mensaje</td><td>fecha</td></tr>";
+       
       foreach ($misMensajes as $mensaje => $mensa) {       
+        print "<form method='POST' action='". url("mensaje/form1")."'>";
         print "<tr>";
         foreach ($mensa as $se => $e) {
-          if($e){
-            print "<td>$e<td>";
+          if($se=='cod_mensaje'){
+            $cod=$e;
           }
+          if($se=='emisor'){
+           $emisor=$e;
+          }
+          if($se=='fecha'){
+            $fechaBuena=new DateTime($e);
+                $prueba = $fechaBuena->format('d-m-Y h:i:s');
+            print "<th>$prueba</th>"; 
+          }
+          if($se!='cod_mensaje' && $se!='receptor' && $se!='fecha'){
+            print "<th>$e</th>";
+          }
+
         }
-        print "<td><input type='submit'name='accion' value='Contestar'></td><td><input type='submit'name='accion' value='Borrar'></td></tr>";
+        print "<td><input type='hidden' name='cod' value=$cod>
+        <input type='hidden' name='nombre' value=$emisor>
+        <input type='submit'name='accion' value='Contestar'></td><td><input type='submit'name='accion' value='Borrar'></td></tr>";
         print "</form>";
       }
       
       print "</table>";
+      print "</div>";
+  }
   ?>
- <h2 id="demo"></h2>
+<?php
+    $misMensajes=db_query("SELECT * FROM mensajes WHERE emisor=:nombre",array(':nombre'=>$nombre))->fetchAll();
+  if(isset($_GET['borrar'])){
+    print "<div class='alert alert-info'>Mensaje borrado</div>";
+  }
+  if(isset($_GET['enviado'])){
+    print "<div class='alert alert-info'>Mensaje enviado</div>";
+  }
+  if(isset($misMensajes) && !empty($misMensajes)){
+    print "<button type='button' class='btn btn-info' data-toggle='collapse' data-target='#env'>Mensajes Enviados</button>";
+      print "<div id='env' class='collapse'>";
+   print "<table class='table'>
+      <tr><td>Para</td></td><td>Mensaje</td><td>fecha</td></tr>";
+       
+      foreach ($misMensajes as $mensaje => $mensa) {       
+        print "<form method='POST' action='". url("mensaje/form1")."'>";
+        print "<tr>";
+        foreach ($mensa as $se => $e) {
+          if($se=='cod_mensaje'){
+            $cod=$e;
+          }
+          if($se=='receptor'){
+           $emisor=$e;
+          }
+          if($se=='fecha'){
+            $fechaBuena=new DateTime($e);
+                $prueba = $fechaBuena->format('d-m-Y h:i:s');
+            print "<th>$prueba</th>"; 
+          }
+          if($se!='cod_mensaje' && $se!='emisor' && $se!='fecha'){
+            print "<th>$e</th>";
+          }
+
+        }
+        print "<td><input type='hidden' name='cod' value=$cod>
+        <input type='hidden' name='nombre' value=$emisor>
+        </td><td><input type='submit'name='accion' value='Borrar'></td></tr>";
+        print "</form>";
+      }
+      
+      print "</table>";
+      print "</div>";
+  }
+  ?>
+  <div class="alert alert-info" id="demo"></div>
+  
   <a href="<?php print url('/mensaje/form1'); ?>">Escribir nuevo mensaje</a>
 	 
   </div>
    <script type="text/javascript">
      jQuery(document).ready(function($) { 
-        if(!$("tr:nth-child(2)").length){
+        $("#demo").show();
+        if(!$("tr:nth-child(1)").length){
            $("#tabla").hide();
-           document.getElementById("demo").innerHTML = "No hay mensajes";
+            
+            document.getElementById("demo").innerHTML = "No hay mensajes";
+          }else{
+              $("#demo").hide();
           }
       });
     </script>

@@ -36,10 +36,13 @@ function registrar_actividad(){
 	':fecha'=>$fecha , ':titulo' => $titulo ,':caloria' =>$caloria,':duracion'=>$duracion ,':actividad' => $actividad,
 	':tipo_actividad'=>$tipo_actividad));
 	
-	if($resultado){
+	if($resultado){	
+		//$url=$url."?dato=bien";
+		//$_GET['destination']=$url;
 		
-		$url=$url."?dato=bien";
-		header("Location:http://jjml.xyz$url");
+		//drupal_goto($url);
+
+			header("Location:".$url."?dato=bien");
 	
 	}else{
 		drupal_get_messages('Registro Incorrecto');;		

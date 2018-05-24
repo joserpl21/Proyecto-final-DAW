@@ -1,0 +1,91 @@
+<?php 
+
+function participar_menu() {
+
+$items = array();
+
+$items['participar/registrar'] = array(
+
+'title' => 'Configuracion de participante',
+
+
+'page callback' => 'registrar_participante',
+ 'access callback' => TRUE,
+
+
+ );
+
+return $items; }
+
+function registrar_participante(){
+	$accion=$_POST['accion'];
+	$cod=$_POST['cod_evento'];
+	$nid=$_POST['nid'];
+	$usuario=$_POST['usuario'];
+	$ruta = $_POST['ruta'];
+	switch ($accion) {
+		case 'Participar':
+			$resultado=db_query("INSERT INTO `participantes`(`cod_evento`, `nid`, `participante`) VALUES (:cod,:nid,:usuario)",array(':cod'=>$cod,':nid'=>$nid,':usuario'=>$usuario));
+			$insertar=db_query("SELECT count(*) as total FROM `participantes` where cod_evento=:cod GROUP BY cod_evento",array(':cod'=>$cod))->fetchField();
+			
+			if(empty($insertar)){
+				$insertar=0;
+			}
+			watchdog("ver", print_r($insertar,1));
+			$update=db_query("UPDATE `field_data_field_part` SET field_part_value=:val WHERE entity_id=:nid", array(':val'=>$insertar,':nid'=>$cod));
+			header("Location:".$ruta."?dato=bien");
+			break;
+		case 'Quitar participacion':
+			$borar=db_query("DELETE FROM `participantes` WHERE cod_evento=:cod and nid=:nid", array(':cod' => $cod,':nid'=>$nid));
+			$insertar=db_query("SELECT count(*) as total FROM `participantes` where cod_evento=:cod GROUP BY cod_evento",array(':cod'=>$cod))->fetchField();
+			if(empty($insertar)){
+				$insertar=0;
+			}
+			watchdog("ver", print_r($insertar,1));
+			$update=db_query("UPDATE `field_data_field_part` SET field_part_value=:val WHERE entity_id=:nid", array(':val'=>$insertar,':nid'=>$cod));
+			header("Location:".$ruta);
+				break;
+		default:
+			# code...
+			break;
+	}
+		
+}
+
+
+
+function participar_permission() {
+
+return array(
+
+'administer participar settings' => array(
+
+'title' => t('Administer registrar configurations'),
+
+'restrict access' => true)
+
+);
+
+}
+/**
+* Formulario de configuración
+*
+* @return array The form structure.
+*/
+function participar_admin() {
+$form = array();
+
+// Algo que configurar
+$form['registrar_something'] = array(
+'#type' => 'textfield',
+'#title' => t('Something'),
+'#default_value' => variable_get(‘registrar_something’, ""),
+'#size' => 60,
+'#maxlength' => 250,
+'#description' => t("Something"),
+'#required' => TRUE,
+);
+
+return system_settings_form($form);
+}
+?>

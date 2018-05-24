@@ -14,33 +14,34 @@ return $items;
 
 
 function mensaje_form1($form_state) {
-	/**if(isset($_POST['accion'])){
-		$fecha
+	if(isset($_POST['accion'])){
+		$cod=$_POST['cod'];
+		$emisor=$_POST['nombre'];
 switch ($_POST['accion']) {
 	case 'Contestar':
-		# code...
+		variable_set('destinatario', $emisor);
 		break;
 	case 'Borrar':
-		$borrar=db_query("DELETE FROM `mensajes` WHERE fecha=:fecha",array(':fecha',$fecha));
+		$borrar=db_query("DELETE FROM `mensajes` WHERE cod_mensaje=:cod",array(':cod'=>$cod));
+		header("Location:".url("cuenta/mensajes")."?borrar=bien");
 		break;
 	default:
-		# code...
-		break;
-}}**/
+	variable_set('destinatario', '');
+	break;
+}}
+
 Global $user;
 
 $form['destinatario'] = array(
 '#type' => 'textfield',
 '#title' => t('Ingrese nombre de usuario'),
-'#default_value' => variable_get('destinatario'),
+'#default_value' => variable_get('destinatario'),	
 '#element_validate' => array('dest_validate')
 );
-
-
 $form['mensaje'] = array(
 '#type' => 'textarea',
 '#title' => t('Mensaje'),
-'#default_value' => variable_get('mensaje'),
+'#default_value' => '',
 '#description' => t('Seleccionar actividad'),
 '#required'=>true
 );
@@ -60,12 +61,12 @@ $form['submit'] = array(
 '#type' => 'submit',
 '#value' => 'Enviar',
 );
+
 return $form;
 }
 
 function dest_validate($element, &$form_state, $form) {
   $value = $element['#value'];
-
   $existe = db_query("SELECT uid FROM `users` where name=:name", array(':name'=>$value))->fetchField();
   if(!$existe){
   	form_error($element, t('No existe usuario con ese nombre.'));
@@ -82,11 +83,12 @@ function mensaje_form1_submit($form, &$form_state){
 
 	$actualizar=db_query("INSERT INTO mensajes(emisor, receptor, mensaje,fecha) VALUES (:emisor,:receptor,:mensaje,:fecha)",array(':emisor'=> $form_state['values']['emisor'],':receptor'=>$form_state['values']['destinatario'],':mensaje' => $form_state['values']['mensaje'],':fecha'=>$form_state['values']['fecha']));
 	
-if($actualizar->rowCount()>0){
-	drupal_set_message('Datos actualizados correctamente'); 
-}else{
+if(!$actualizar->rowCount()>0){	
 form_error(t('Error'));	
 }
+//header("Location:".url("cuenta/mensajes")."?enviado=bien");
+drupal_set_message('Mensaje enviado correctamente');          
+          $form_state['redirect'] = 'cuenta/mensajes';
           //$form_state['redirect'] = 'content/tus-eventos-son';
           
 }

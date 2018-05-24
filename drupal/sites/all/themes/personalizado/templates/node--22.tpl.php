@@ -40,7 +40,7 @@
   ?>
   <a href="<?php print url($url); ?>">Editar perfil</a>
   <br />
-  <a href="<?php print url('node/add/forum'); ?>">Crear Foro(Quedada)</a>
+  <a href="<?php print url('node/add/crear-evento'); ?>">Crear Evento(Quedada)</a>
   <?php
     // Remove the "Add new comment" link on the teaser page or if the comment
     // form is being displayed on the same page.

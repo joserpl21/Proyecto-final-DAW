@@ -70,7 +70,7 @@
 	<?php 
 
 	if(user_is_logged_in()){?>
-   <form method="POST" action="http://jjml.xyz/drupal/registrar/mensaje" style="clear: both; float: left">
+   <form method="POST" action="<?php print url("registrar/mensaje"); ?>" style="clear: both; float: left">
     	<?php 
 			global $user;
 		$usuario = $user->name;

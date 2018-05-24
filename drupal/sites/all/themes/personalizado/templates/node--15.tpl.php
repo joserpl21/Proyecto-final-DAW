@@ -67,7 +67,8 @@
       }
        ?>
        <input type="text" id="buscar"style="margin-top: 1%;">
-       <input type="submit" value="buscar" onclick="buscador2(jQuery('#buscar').val())">
+       <input type="submit"  class="btn btn-dark" value="buscar" onclick="buscador2(jQuery('#buscar').val())">
+       <input type="submit" class="btn btn-dark" value="Quitar filtro" onclick="limpiar()">
        <?php 
       if(isset($comidas) && !empty($comidas)){
       print "<table class='table'><tr><td>Fecha</td><td>Nombre Actividad</td><td>cal</td><td>Tipo</td></tr>";
@@ -251,12 +252,13 @@
       //if(url.length>0){
           //alert("Tiene ".tien[0]);
       //}else{
-      // if(url.indexOf("nombre=")!=-1){
-       // var urlLimpia=url.split('?');
-         // url+='&nombre';
-       //}else{
-        url+="?nombre="+buscar;
-     
+        if(url.indexOf("nombre=")!=-1){
+       var urlLimpia=url.split('?');
+        url=urlLimpia[0];
+         url+="?nombre="+buscar;
+       }else{
+         url+="?nombre="+buscar;
+      }
       //alert("Funcionaa  "+ url);
       window.location.replace(url);
     }
@@ -267,6 +269,14 @@
       //alert("Funcionaa  "+ url);
       window.location.replace(url);
     }
+
+    function limpiar(){
+        var url = jQuery(location).attr('href');
+      var urlLimpia=url.split('?');
+        url=urlLimpia[0];
+         window.location.replace(url);
+    }
+    
   </script>
   <?php
     // Remove the "Add new comment" link on the teaser page or if the comment

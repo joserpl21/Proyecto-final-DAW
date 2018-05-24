@@ -39,7 +39,10 @@
       hide($content['field_texto_imagenes_slider']);
       hide($content['field_imagen_slider']);
       print render($content);
-
+      $host= $_SERVER["HTTP_HOST"];
+      $url= $_SERVER["REQUEST_URI"];
+      $urlfinal= "http://" . $host .base_path();
+      
 
     ?>
     
@@ -119,7 +122,7 @@ function enviarEstrellas(valor){
 	<?php 
 
 	if(user_is_logged_in()){?>
-    <form method="POST" action="http://jjml.xyz/drupal/registrar/mensaje" style="clear: both; float: left">
+    <form method="POST" action="<?php print url("registrar/mensaje"); ?>" style="clear: both; float: left">
     	<?php 
 	
 		
@@ -147,7 +150,17 @@ function enviarEstrellas(valor){
   <br />
    <h3 id="mensaje" class="alert alert-success"></h3>
 <h3 id="mensaje2" class="alert alert-warning"></h3>
+<button id="imprimir">Imprimar receta</button>
+  <script type="text/javascript">
+    
+    jQuery("#imprimir").click(function(){
+      var url="<?php print $urlfinal ?>/print/<?php print $node->nid ?>";
+      window.open(url, '_blank');
+       
+    });
+  </script>
   <?php
+
     // Remove the "Add new comment" link on the teaser page or if the comment
     // form is being displayed on the same page.
     if ($teaser || !empty($content['comments']['comment_form'])) {

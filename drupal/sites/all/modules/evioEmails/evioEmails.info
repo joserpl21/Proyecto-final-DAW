@@ -1,0 +1,8 @@
+name = Envia emails
+description = Envia emails masivamente
+core = 7.x
+version = "7.x-2.1"
+project = "jjML"
+package= "JJML"
+
+
