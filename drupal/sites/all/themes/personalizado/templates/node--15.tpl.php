@@ -40,15 +40,15 @@
       $buscar2=$_GET['nombre2'];}
     
       if(isset($buscar) &&  !empty($buscar)){
-      $comidas=db_query("Select * FROM registro where nombre_usuario=:usuario and actividad='comida' and nombre_actividad like :nombact order by fecha DESC",array(':usuario'=>$user->name,':nombact'=>"%$buscar%"))->fetchAll();
+      $comidas=db_query("Select * FROM registro where uid=:uid and actividad='comida' and nombre_actividad like :nombact order by fecha DESC",array(':usuario'=>$user->uid,':nombact'=>"%$buscar%"))->fetchAll();
         }else{
-           $comidas=db_query("Select * FROM registro where nombre_usuario=:usuario and actividad='comida' order by fecha DESC",array(':usuario'=>$user->name))->fetchAll();
+           $comidas=db_query("Select * FROM registro where uid=:uid and actividad='comida' order by fecha DESC",array(':uid'=>$user->uid))->fetchAll();
         }
 
     if(isset($buscar2) &&  !empty($buscar2)){
-           $ejercicio=db_query("Select * FROM registro where nombre_usuario=:usuario and actividad='ejercicio' and nombre_actividad like :nombact order by fecha DESC",array(':usuario'=>$user->name,':nombact'=>"%$buscar2%"))->fetchAll();
+           $ejercicio=db_query("Select * FROM registro where uid=:uid and actividad='ejercicio' and nombre_actividad like :nombact order by fecha DESC",array(':uid'=>$user->uid,':nombact'=>"%$buscar2%"))->fetchAll();
      }else{
-       $ejercicio=db_query("Select * FROM registro where nombre_usuario=:usuario and actividad='ejercicio' order by fecha DESC",array(':usuario'=>$user->name))->fetchAll();
+       $ejercicio=db_query("Select * FROM registro where uid=:uid and actividad='ejercicio' order by fecha DESC",array(':uid'=>$user->uid))->fetchAll();
       }
       $datos;
       //print_r($comidas);
@@ -67,7 +67,7 @@
       }
        ?>
        <input type="text" id="buscar"style="margin-top: 1%;">
-       <input type="submit"  class="btn btn-dark" value="buscar" onclick="buscador2(jQuery('#buscar').val())">
+       <input type="submit"  class="btn btn-dark" value="buscar"  required onclick="buscador2(jQuery('#buscar').val())">
        <input type="submit" class="btn btn-dark" value="Quitar filtro" onclick="limpiar()">
        <?php 
       if(isset($comidas) && !empty($comidas)){
@@ -76,7 +76,7 @@
              foreach ($c as $se => $e) {
           if($se=="fecha"){
           $s=new DateTime($e);
-                $fecha = $s->format('d-m-Y h:i:s');            
+                $fecha = $s->format('Y-m-d H:i:s');            
             
           }
           if($se=="nombre_actividad"){
@@ -120,13 +120,16 @@
       print "<div id='ejer' class='collapse in' style='hight: auto;'>";
       
       }else{
-      print "<button type='button' class='btn btn-info' data-toggle='collapse' data-target='#ejer' style='margin-top: 1%;'>Ver ejercicio</button>";
+      print "<button type='button' class='btn btn-info' data-toggle='collapse' data-target='#ejer' style='margin-top: 1%;' class='btn btn-dark'>Ver ejercicio</button>";
       print "<div id='ejer' class='collapse'>";
         
       }?>
         <?php ?>
-        <input type="text" id="buscar2" style="margin-top: 1%;">
-       <input type="submit" value="buscar" onclick="buscador1(jQuery('#buscar2').val())">
+        
+        <input type="text" id="buscar2" style="margin-top: 1%;" required>
+       <input type="submit" value="buscar" class="btn btn-dark" onclick="buscador1(jQuery('#buscar2').val())" >
+       <input type="submit" class="btn btn-dark" value="Quitar filtro" onclick="limpiar()">
+       
         <?php
         if(isset($ejercicio) && !empty($ejercicio)){
         print "<table class='table'>
@@ -136,7 +139,7 @@
         foreach ($c as $se => $e) {
            if($se=="fecha"){
             $s=new DateTime($e);
-            $fecha = $s->format('d-m-Y h:i:s');
+            $fecha = $s->format('Y-m-d H:i:s');
           }
           if($se=="nombre_actividad"){
            $nomAct=$e; 
@@ -168,7 +171,7 @@
             } 
     ?>
 	</div>
-<?php }elseif($buscador2){ ?>
+<?php }elseif($buscar2){ ?>
   <div class="alert alert-info">No hay ningun ejercicio con ese filtro!</div>
 <?php }else{?>
  <div class="alert alert-info">Aun no has registrado niguna ejercicio!</div>
@@ -177,8 +180,8 @@
 
   <?php
   $nids=[];
-  $favoritas = db_query("SELECT nombre_actividad as Ejercicios  FROM registro WHERE nombre_usuario=:user and actividad='ejercicio'  GROUP BY nombre_actividad ORDER BY Ejercicios DESC LIMIT 3",array(':user'=>$user->name))->fetchCol();
-  $nfav = db_query("SELECT count(*) as Ejercicios  FROM registro WHERE nombre_usuario=:user and actividad='ejercicio'  GROUP BY nombre_actividad ORDER BY Ejercicios DESC LIMIT 3",array(':user'=>$user->name))->fetchCol();
+  $favoritas = db_query("SELECT nombre_actividad as Ejercicios  FROM registro WHERE uid=:uid and actividad='ejercicio'  GROUP BY nombre_actividad ORDER by count(*) DESC LIMIT 3",array(':uid'=>$user->uid))->fetchCol();
+  $nfav = db_query("SELECT count(*) as Ejercicios  FROM registro WHERE uid=:uid and actividad='ejercicio'  GROUP BY nombre_actividad ORDER by count(*) DESC LIMIT 3",array(':uid'=>$user->uid))->fetchCol();
   foreach ($favoritas as $fav) {
     $nids[]= db_query("SELECT nid FROM `node_revision` where title=:titulo",array('titulo'=>$fav))->fetchField();
   }
@@ -188,7 +191,7 @@
   }
 
    ?>
-   <?php if(isset($favoritas)):?>
+   <?php if(isset($favoritas) && !empty($favoritas)):?>
     <h2 style="margin-top: 2%;">Ejercicios Favoritos</h2>
     <br />
    <div class="row">
@@ -213,8 +216,8 @@
  $nids=[];
  $imgs=[];
 
-  $favoritas = db_query("SELECT nombre_actividad as Ejercicios  FROM registro WHERE nombre_usuario=:user and actividad='comida'  GROUP BY nombre_actividad ORDER BY Ejercicios DESC LIMIT 3",array(':user'=>$user->name))->fetchCol();
-  $nfav = db_query("SELECT count(*) as Ejercicios  FROM registro WHERE nombre_usuario=:user and actividad='comida'  GROUP BY nombre_actividad ORDER BY Ejercicios DESC LIMIT 3",array(':user'=>$user->name))->fetchCol();
+  $favoritas = db_query("SELECT nombre_actividad as Ejercicios  FROM registro WHERE uid=:uid and actividad='comida'  GROUP BY nombre_actividad  ORDER by count(*) DESC LIMIT 3",array(':uid'=>$user->uid))->fetchCol();
+  $nfav = db_query("SELECT count(*)  FROM registro WHERE uid=:uid and actividad='comida'  GROUP BY nombre_actividad ORDER by count(*) DESC LIMIT 3",array(':uid'=>$user->uid))->fetchCol();
   foreach ($favoritas as $fav) {
     $nids[]= db_query("SELECT nid FROM `node_revision` where title=:titulo",array('titulo'=>$fav))->fetchField();
   };
@@ -223,9 +226,9 @@
     $imgs[]=db_query("SELECT filename FROM `file_managed` as m inner join field_data_field_imagen as c on m.fid=c.field_imagen_fid where entity_id=:nid",array(':nid'=>$img))->fetchField();
   }
 
-  if(isset($favoritas)){
+  if(isset($favoritas) && !empty($favoritas)){
   ?>
-
+    
     <h2>Comidas Favoritas </h2> 
    <br />
     <div class="row">
@@ -263,17 +266,28 @@
       window.location.replace(url);
     }
     function buscador1(buscar){
-
       var url = jQuery(location).attr('href');
-      url+="?nombre2="+buscar;
+       //if(url.length>0){
+          //alert("Tiene ".tien[0]);
+      //}else{
+        if(url.indexOf("nombre2=")!=-1){
+       var urlLimpia=url.split('?');
+        url=urlLimpia[0];
+         url+="?nombre2="+buscar;
+       }else{
+         url+="?nombre2="+buscar;
+      }
       //alert("Funcionaa  "+ url);
       window.location.replace(url);
-    }
-
+}
     function limpiar(){
         var url = jQuery(location).attr('href');
-      var urlLimpia=url.split('?');
-        url=urlLimpia[0];
+        var urlLimpia=url.split('?');
+        if(urlLimpia[0]){
+          url=urlLimpia[0];
+        }
+      
+        
          window.location.replace(url);
     }
     

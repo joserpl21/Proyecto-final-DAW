@@ -36,18 +36,8 @@ function valorar_actividad(){
 		$total=$total+$valor;
 	}
 	$va=round($total/$i);
-	//$tiene=db_query("SELECT field_calificacion_value FROM `field_data_field_calificacion` where entity_id=:id",array(':id'=>$nid))->fetchField();
-	//if($tiene){
+	
 	$act=db_query("UPDATE `field_data_field_calificacion` SET `field_calificacion_value`=:va WHERE entity_id=:nid",array(':va'=>$va,':nid'=>$nid));
-	
-	
-	//$final = ($valor + $v)/2;
-	
-	//$result=db_query("UPDATE field_data_field_calificacion SET field_calificacion_value=:val WHERE revision_id=:id",array(':val'=>$final,':id'=>$nid))->fetchField();
-	
-	//return "La valoraciones " . $valor;
-	
-	
 }
 
 

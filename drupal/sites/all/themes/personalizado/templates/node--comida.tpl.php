@@ -20,10 +20,13 @@
     </div>
   <?php endif; ?>
  <?php 
+  $host1= "http://".$_SERVER["HTTP_HOST"]. base_path()."valorar/valor";
    if(user_is_logged_in()){
+    
      global $user;
     $usuario = $user->name; 
      }
+     
     $nid=$node->nid;
     $estre=db_query("SELECT field_calificacion_value FROM `field_data_field_calificacion` WHERE entity_id=:nid",array(':nid'=>$nid))->fetchField();
     $totVotos=db_query("SELECT COUNT(*) FROM `valoracion` where cod_act=:nid GROUP by cod_act",array(':nid'=>$nid))->fetchField();
@@ -60,7 +63,7 @@
 
  <?php if(isset($estre)){?>
 
-  <form  method="POST" action="http://jjml.xyz/drupal/valorar/valor">
+  <form  method="POST" action="<?php print url("valorar/valor"); ?>">
   <h2>Califica la comida:</h2>   
    <p class="clasificacion">
       <input id="radio1" type="radio" name="estrellas" value="5" <?php if($estre==5){print "checked";}?>  onclick="enviarEstrellas(jQuery('#radio1').val())" <?php if(!user_is_logged_in()){ print "disabled";} ?>><!--
@@ -97,14 +100,14 @@ function enviarEstrellas(valor){
       "valor":valor,
       "nid": <?php print $nid;?>,
       "tipo": "comida",
-      "uid": "<?php print $usuario ;?>",
+      "uid": "<?php print $user->uid ;?>",
     }; 
     jQuery("#mensaje").show();
     document.getElementById("mensaje").innerHTML = "Gracias por su valoracion!";
     
        jQuery.ajax({
                 data:  parametros, //datos que se envian a traves de ajax
-                url:   'http://jjml.xyz/drupal/valorar/valor', //archivo que recibe la peticion
+                url:  '<?php print $host1; ?>', //archivo que recibe la peticion
                 type:  'post'
               });
      <?php } ?>
@@ -127,13 +130,13 @@ function enviarEstrellas(valor){
 	
 		
 		$term=sacarTipoComida($node->nid);
-    	$fecha= date("Y-m-d h:i:s");
+    	$fecha= date("Y-m-d H:i:s");
     	$cal= $node->field_calorias['und'][0]['value'];
 
     ?>	
 
     
-	<input type="hidden" name="usuario" value="<?php print $usuario;?>">
+	<input type="hidden" name="uid" value="<?php print $user->uid;?>">
 		<input type="hidden" name="fecha" value="<?php print $fecha;?>">
 		<input type="hidden" name="ruta" value="<?php print $node_url;?>">
 		<input type="hidden" name="cal" value="<?php print $cal;?>">
@@ -150,10 +153,10 @@ function enviarEstrellas(valor){
   <br />
    <h3 id="mensaje" class="alert alert-success"></h3>
 <h3 id="mensaje2" class="alert alert-warning"></h3>
-<button id="imprimir">Imprimar receta</button>
+<button id="imprimir"class='btn btn-danger'>Imprimar receta</button>
   <script type="text/javascript">
     
-    jQuery("#imprimir").click(function(){
+      jQuery("#imprimir").click(function(){
       var url="<?php print $urlfinal ?>/print/<?php print $node->nid ?>";
       window.open(url, '_blank');
        

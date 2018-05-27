@@ -25,10 +25,13 @@
   <div class="content clearfix"<?php print $content_attributes; ?>>
     <?php
 	   if(user_is_logged_in()){
+      $host= "http://".$_SERVER["HTTP_HOST"]. base_path()."valorar/valor";
+  
      global $user;
-    $usuario = $user->name; 
+    $usuario = $user->uid; 
+    $uid=db_query("select uid from users where uid=:uid", array(':uid'=>$usuario))->fetchField();
+    $peso=db_query("SELECT field_peso_value from field_data_field_peso where entity_id=:uid",array(':uid'=>$uid))->fetchField();
      }
-     
     $nid=$node->nid;
     $estre=db_query("SELECT field_calificacion_value FROM `field_data_field_calificacion` WHERE entity_id=:nid",array(':nid'=>$nid))->fetchField();
     $totVotos=db_query("SELECT COUNT(*) FROM `valoracion` where cod_act=:nid GROUP by cod_act",array(':nid'=>$nid))->fetchField();
@@ -45,7 +48,7 @@
   
 	<div id="val">
  <?php if(isset($estre)){?>
-	<form  method="POST" action="http://jjml.xyz/drupal/valorar/valor">
+	<form  method="POST" action="<?php print url("valorar/valor"); ?>">
   <h2>Califica la comida:</h2>   
   <p class="clasificacion">
      <input id="radio1" type="radio" name="estrellas" value="5" <?php if($estre==5){print "checked";}?>  onclick="enviarEstrellas(jQuery('#radio1').val())" <?php if(!user_is_logged_in()){ print "disabled";} ?>><!--
@@ -70,26 +73,37 @@
 	<?php 
 
 	if(user_is_logged_in()){?>
-   <form method="POST" action="<?php print url("registrar/mensaje"); ?>" style="clear: both; float: left">
+   <form method="POST" action="<?php print url("registrar/mensaje")?>"; name='registrar' style="clear: both; float: left" ">
     	<?php 
 			global $user;
-		$usuario = $user->name;
+		$usuario = $user->uid;
+
 		$term=sacarTipoEjercicio($node->nid);
-    	$fecha=  date("Y-m-d h:i:s");
+    	$fecha=  date("Y-m-d H:i:s");
     	$cal= $node->field_calorias['und'][0]['value'];
-		//$tipo= $node->field_tipo_de_comida
+	
     ?>	
 	
-			<input type="hidden" name="usuario" value="<?php print $usuario;?>">
+			<input type="hidden" name="uid" value="<?php print $usuario;?>">
 		<input type="hidden" name="nid" value="<?php print $node->nid;?>">	
 		<input type="hidden" name="fecha" value="<?php print $fecha;?>">
 		<input type="hidden" name="cal" value="<?php print $cal;?>">
 		<input type="hidden" name="ruta" value="<?php print $node_url;?>">
-		<input type="hidden" name="duracion" value="<?php print $node->field_duracion['und'][0]['value'] ?>">
 		<input type="hidden" name="nombre" value="<?php print $title;?>">
 		<input type="hidden" name="actividad" value="ejercicio">
 		<input type="hidden" name="tipo_actividad" value="<?php print $term;?>">
-    	<input type="submit" name="registrar" value="Registrar" class="btn btn-success">
+    	
+      <button type='button' class='btn btn-info' data-toggle='collapse' data-target='#reg' >Registrar </button>
+      <div id='reg' class='collapse'>
+        <?php if(!isset($peso) || empty($peso)){
+        print "<div class='alert alert-warning' style='float: left; clear: both;'>Necesita ingresar su peso para organizar correctamente la rutina  ";
+        
+        print "<a href='". base_path()."user/".$user->uid."/edit'>Editar perfil</a></div>";}else{
+           ?>
+        Ingresar el tiempo que realizo el ejercicio: <input type="text" name="duracion" id="duracion" required onKeypress="if (event.keyCode < 45 || event.keyCode > 57) event.returnValue = false;">Min
+        <input type="submit" name="registrar" value="Registrar" class="btn btn-success" style="float: right; clear: both;">
+      <?php } ?>
+      </div>
     </form>
     
 	<?php }?>
@@ -102,6 +116,8 @@ jQuery(document).ready(function($) {
 jQuery("#mensaje").hide();
 jQuery("#mensaje2").hide();
 });
+  
+
 function enviarEstrellas(valor){
     
    	<?php if(user_is_logged_in()){?>
@@ -116,7 +132,7 @@ function enviarEstrellas(valor){
     //alert("El valor de la votacion es " + valor);
        jQuery.ajax({
                 data:  parametros, //datos que se envian a traves de ajax
-                url:   'http://jjml.xyz/drupal/valorar/valor', //archivo que recibe la peticion
+                url:   '<?php print $host; ?>', //archivo que recibe la peticion
                 type:  'post'
               });
        

@@ -25,8 +25,9 @@
       hide($content['field_texto_imagenes_slider']);
       hide($content['field_imagen_slider']);
       print render($content);
-
-
+      global $user;
+      //$eventos=db_query("SELECT cod_evento FROM `participantes` WHERE nid=:nid",array(':nid'=>$user->uid))->fecthCold();
+      //print_r($eventos);
 
     ?>
   </div>
@@ -41,6 +42,8 @@
   <a href="<?php print url($url); ?>">Editar perfil</a>
   <br />
   <a href="<?php print url('node/add/crear-evento'); ?>">Crear Evento(Quedada)</a>
+
+
   <?php
     // Remove the "Add new comment" link on the teaser page or if the comment
     // form is being displayed on the same page.

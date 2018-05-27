@@ -43,7 +43,7 @@ function registrar_participante(){
 			}
 			watchdog("ver", print_r($insertar,1));
 			$update=db_query("UPDATE `field_data_field_part` SET field_part_value=:val WHERE entity_id=:nid", array(':val'=>$insertar,':nid'=>$cod));
-			header("Location:".$ruta);
+			header("Location:".$ruta."?desc=si");
 				break;
 		default:
 			# code...

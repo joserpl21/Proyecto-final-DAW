@@ -5,6 +5,10 @@
 	  
     print "<div class='alert alert-success'>Inscrito Correctamente</div>";
    }	
+   if(isset($_GET['desc'])){
+	print "<div class='alert alert-success'>Desinscrito Correctamente</div>";   
+   }
+   
 	?>
     <?php print render($title_prefix); ?>
   <?php if (!$page): ?>
@@ -32,11 +36,12 @@
       print render($content);
       hide($content['field_invitar']);
       $cant=db_query("SELECT field_part_value from field_data_field_part where entity_id=:id",array(':id'=>$node->nid))->fetchField();
-
+      $participantes=db_query("SELECT participante FROM `participantes`where cod_evento=:cod",array(':cod'=>$node->nid))->fetchCol();
       
     ?>
       <h3>Nº Participantes</h3>       
     <?php
+
       print $cant."<br />";
     $v=db_query("SELECT log FROM node_revision WHERE vid=:vid",array(':vid'=>$node->nid))->fetchField();
     
@@ -64,13 +69,12 @@
     'Reply-To: josep2112ml@gmail.com' . "\r\n" .
     'X-Mailer: PHP/' . phpversion();
     $respuesta=mail($para, $titulo, $mensaje, $cabeceras);
-    print_r($respuesta);
+    //print_r($respuesta);
         }     
       }
     }
       
     
-    $participantes=db_query("SELECT participante FROM `participantes` where cod_evento=:nid",array(':nid'=>$node->nid))->fetchCol();
 
     if(user_is_logged_in()){
      global $user;

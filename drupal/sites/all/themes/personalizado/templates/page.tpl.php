@@ -92,6 +92,9 @@
             $(location).attr('href',url);
         });
         $(".progress").hide();
+        //$(".permalink").hide();
+        //alert($(".permalink").val());
+
            $("#edit-locale").hide();
             $("#edit-contact").hide();
             $("#edit-timezone").hide();
@@ -100,6 +103,9 @@
             $("label[for='edit-pass']").hide();
             $(".form-item-field-part-und-0-value").hide();
             $(".tabledrag-toggle-weight").hide();
+            $(".form-item-print-pdf-size").hide();
+            $(".form-item-print-pdf-orientation").hide();
+            
             //if($(".easy-breadcrumb_segment").val()="Node"){
              //   $(".easy-breadcrumb_segment").hide();
             //}
