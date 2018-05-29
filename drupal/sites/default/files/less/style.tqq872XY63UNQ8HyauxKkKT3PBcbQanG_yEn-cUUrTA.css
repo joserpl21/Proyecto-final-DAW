@@ -6,6 +6,7 @@ body {
   color: #333333;
   background: #fff;
   padding: 0px;
+  background: #f2f2f2;
 }
 a {
   color: #005192;
@@ -306,8 +307,11 @@ block-views-mejores-ejercicios-block-1 #block-views-mejores-ejercicios-block-1 h
   background-size: 15px;
   margin-right: 5px;
 }
---------------------------------------------------------------------------------- --------------------------------------------------------------------------------- .comment {
-  margin-left: 18px;
-  float: right;
-  color: #a78c20;
+--------------------------------------------------------------------------------- --------------------------------------------------------------------------------- .view-comidas-vegetarianas .views-row {
+  border-bottom: 3px solid #f6f6f6;
+  padding: 20px 0;
+}
+.view-comidas-vegetarianas .views-row-last {
+  border-bottom: none;
+  padding: 20px 0 0;
 }

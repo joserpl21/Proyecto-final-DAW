@@ -306,8 +306,6 @@ block-views-mejores-ejercicios-block-1 #block-views-mejores-ejercicios-block-1 h
   background-size: 15px;
   margin-right: 5px;
 }
---------------------------------------------------------------------------------- --------------------------------------------------------------------------------- .comment {
-  margin-left: 18px;
-  float: right;
-  color: #a78c20;
+--------------------------------------------------------------------------------- --------------------------------------------------------------------------------- .node-comida .comments .comment {
+  color: red !important;
 }

@@ -16,6 +16,51 @@
         <?php endif; ?>
     
 </header>
+<style type="text/css">
+  .comment-form{
+     background: white;
+  box-shadow: rgba(0,0,0,0.05) 0 3px 3px 0;
+
+  margin: 0 20px 20px;
+  
+  position: relative;
+  font-size: 20px;
+  }
+.comment {
+  background: white;
+  box-shadow: rgba(0,0,0,0.05) 0 3px 3px 0;
+  margin: 0 20px 20px;
+  padding: 20px;
+  position: relative;
+  font-size: 15px;
+}
+
+.comment-reply a{
+  color: white;
+}
+.comment-reply {
+  display: inline-block;
+  background-color: rgba(0, 0, 0, .7); /* pink */
+  color: white;
+  padding: 15px 20px;
+  font-size: 15px;
+  text-decoration: none;
+  margin-bottom: 20px;
+  transition: all 800ms cubic-bezier(.190, 1, .220, 1);
+  outline: 0;
+  position: relative;
+}
+.comment .comment-reply {
+  padding: 5px 10px;
+  font-size: 13px;
+  margin-bottom: 0;
+  float: right;
+  padding-left: 15px;
+}
+.comment span{
+  float: right;
+}
+</style>
 <div class="container">
 <nav class="navbar navbar-default">
   
@@ -105,6 +150,8 @@
             $(".tabledrag-toggle-weight").hide();
             $(".form-item-print-pdf-size").hide();
             $(".form-item-print-pdf-orientation").hide();
+            $(".submitted >.permalink").hide();
+           // $(".list-inline").hide();
             
             //if($(".easy-breadcrumb_segment").val()="Node"){
              //   $(".easy-breadcrumb_segment").hide();

@@ -309,5 +309,5 @@ block-views-mejores-ejercicios-block-1 #block-views-mejores-ejercicios-block-1 h
 --------------------------------------------------------------------------------- --------------------------------------------------------------------------------- .comment {
   margin-left: 18px;
   float: right;
-  color: #a78c20;
+  color: #a78c20 !important;
 }

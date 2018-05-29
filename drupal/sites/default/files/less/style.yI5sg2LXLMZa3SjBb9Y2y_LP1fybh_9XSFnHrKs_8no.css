@@ -6,6 +6,7 @@ body {
   color: #333333;
   background: #fff;
   padding: 0px;
+  background: #f2f2f2;
 }
 a {
   color: #005192;
@@ -114,7 +115,7 @@ label:hover ~ label {
 #val input[type="radio"]:checked ~ label {
   color: orange;
 }
---------------------------------------------------------------------------------- #block-views-mejores-comidas-block-1 h2 {
+--------------------------------------------------------------------------------- #block-views-mejores-comidas-block-1 a {
   padding: 12px 20px;
   display: block;
   font-family: 'FuturaBT-Bold';
@@ -129,7 +130,7 @@ label:hover ~ label {
   margin-bottom: 0px;
   margin-top: 30px;
 }
-#block-views-mejores-comidas-block-1 h2 {
+#block-views-mejores-comidas-block-1 a {
   padding: 12px 20px;
   display: block;
   font-family: 'FuturaBT-Bold';
@@ -156,40 +157,8 @@ label:hover ~ label {
   line-height: 18px;
   margin-bottom: 6px;
 }
-#block-views-mejores-comidas-block-1 h3 a {
-  color: #333333;
-}
-#block-views-mejores-comidas-block-1 h3 a:hover {
-  color: #a78c20;
-}
-#block-views-mejores-comidas-block-1 h3::before {
-  content: '';
-  position: absolute;
-  top: 1px;
-  left: -20px;
-  width: 13px;
-  height: 13px;
-  background: #bfab81;
-}
-#block-views-mejores-comidas-block-1 .marca {
-  display: block;
-  font-size: 15px;
-  line-height: 17px;
-  color: #666666;
-  margin-bottom: 8px;
-  min-height: 17px;
-}
-#block-views-mejores-comidas-block-1 .precio_coste {
-  float: right;
-  text-decoration: line-through;
-}
-#block-views-mejores-comidas-block-1 .precio_venta {
-  margin-left: 18px;
-  float: right;
-  color: #a78c20;
-}
 #block-views-mejores-comidas-block-1 .views-row {
-  width: 24%;
+  width: 33%;
   float: left;
   padding: 0;
   margin-right: 15px;
@@ -306,8 +275,10 @@ block-views-mejores-ejercicios-block-1 #block-views-mejores-ejercicios-block-1 h
   background-size: 15px;
   margin-right: 5px;
 }
---------------------------------------------------------------------------------- --------------------------------------------------------------------------------- .comment {
-  margin-left: 18px;
-  float: right;
-  color: #a78c20;
+--------------------------------------------------------------------------------- --------------------------------------------------------------------------------- .view view-comidas-vegetarianas .view-id-comidas_vegetarianas .view-display-id-page {
+  background-color: red;
+}
+.view-comidas-vegetarianas .views-row-last {
+  border-bottom: none;
+  padding: 20px 0 0;
 }

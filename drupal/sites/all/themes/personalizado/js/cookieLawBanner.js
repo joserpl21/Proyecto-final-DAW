@@ -3,7 +3,7 @@ var __cookieLawCountBeforeAccept = 1; 	// Paginas a visitar hasta la aceptación
 var __cookieLawAcceptByScroll = true;	// Aceptación por scroll de página (recomendado)
 var __cookieAcceptInferred = false; 	// Si se activa las aceptaciones tácitas son solo a nivel de sesión
 
-var __cookieLawCookiePolicyUrl = "/politica-de-cookies";
+var __cookieLawCookiePolicyUrl = "/drupal/politica-de-cookies";
 var __cookieLawBannerPosition = "bottom"; // "top" o "bottom"
 var __cokieLawTextPolCookiesName = "aqu&iacute;";
 var __cokieLawTextAccept = "Aceptar";

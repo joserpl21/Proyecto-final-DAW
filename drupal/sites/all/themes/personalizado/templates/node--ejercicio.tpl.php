@@ -45,11 +45,63 @@
 
 
     ?>
+  <style type="text/css">
+     .clearfix{
+     background: white;
+  box-shadow: rgba(0,0,0,0.05) 0 3px 3px 0;
+  margin: 0 20px 20px;
   
+  position: relative;
+  font-size: 20px;
+  }
+  .comment {
+  background: white;
+  box-shadow: rgba(0,0,0,0.05) 0 3px 3px 0;
+  margin: 0 20px 20px;
+  padding: 20px;
+  position: relative;
+  font-size: 15px;
+}
+
+.comment-reply a{
+  color: white;
+}
+.comment-reply {
+  display: inline-block;
+  background-color: rgba(0, 0, 0, .7); /* pink */
+  color: white;
+  padding: 15px 20px;
+  font-size: 15px;
+  text-decoration: none;
+  margin-bottom: 20px;
+  transition: all 800ms cubic-bezier(.190, 1, .220, 1);
+  outline: 0;
+  position: relative;
+}
+
+.comment-reply:active,
+.comment-reply:focus,
+.comment-reply:hover {
+  background: rgba(0, 0, 0, 1); /* pink 10% dark */
+}
+
+
+.comment .comment-reply {
+  padding: 5px 10px;
+  font-size: 13px;
+  margin-bottom: 0;
+  float: right;
+  padding-left: 15px;
+}
+.comment span{
+  float: right;
+} 
+
+  </style>
 	<div id="val">
  <?php if(isset($estre)){?>
 	<form  method="POST" action="<?php print url("valorar/valor"); ?>">
-  <h2>Califica la comida:</h2>   
+  <h3>Califica la comida</h3>   
   <p class="clasificacion">
      <input id="radio1" type="radio" name="estrellas" value="5" <?php if($estre==5){print "checked";}?>  onclick="enviarEstrellas(jQuery('#radio1').val())" <?php if(!user_is_logged_in()){ print "disabled";} ?>><!--
     --><label for="radio1">★</label><!--
@@ -102,18 +154,45 @@
            ?>
         Ingresar el tiempo que realizo el ejercicio: <input type="text" name="duracion" id="duracion" required onKeypress="if (event.keyCode < 45 || event.keyCode > 57) event.returnValue = false;">Min
         <input type="submit" name="registrar" value="Registrar" class="btn btn-success" style="float: right; clear: both;">
+          
       <?php } ?>
+
       </div>
     </form>
     
-	<?php }?>
-	
+	<?php }
+
+  ?>
+   
   </div>
   
+  <div class="modal fade" id="myModal" role="dialog">
+    <div class="modal-dialog">
+    
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">Valoracion</h4>
+        </div>
+        <div class="modal-body">
+          <?php  if(!user_is_logged_in()){
+            print "<p>Registre para valorar</p>";
+          }else{
+ print "<p>Gracias por valorar</p>";
+          }?>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+        </div>
+      </div>
+      
+    </div>
+  </div>
 <script>
   jQuery(".btn-success").show();
 jQuery(document).ready(function($) { 
-jQuery("#mensaje").hide();
+//jQuery("#mensaje").hide();
 jQuery("#mensaje2").hide();
 });
   
@@ -127,8 +206,8 @@ function enviarEstrellas(valor){
       "tipo": "ejercicio",
       "uid": "<?php print $usuario ;?>",
     };
-   jQuery("#mensaje").show();
-    document.getElementById("mensaje").innerHTML = "Gracias por su valoracion!";
+   jQuery("#myModal").modal('show');
+   // document.getElementById("mensaje").innerHTML = "Gracias por su valoracion!";
     //alert("El valor de la votacion es " + valor);
        jQuery.ajax({
                 data:  parametros, //datos que se envian a traves de ajax
@@ -141,14 +220,13 @@ function enviarEstrellas(valor){
   }
 		<?php if(!user_is_logged_in()){?>
   		jQuery(".clasificacion").click(function() {
-  			jQuery("#mensaje2").show();
- 		 document.getElementById("mensaje2").innerHTML = "Registrese para valorar";
+  			jQuery("#myModal").modal('show');
+ 		 
 		});
   	<?php }?>
 </script>
 <br />
-  <h3 id="mensaje" class="alert alert-success"></h3>
-<h3 id="mensaje2" class="alert alert-warning"></h3>
+
   <?php
     // Remove the "Add new comment" link on the teaser page or if the comment
     // form is being displayed on the same page.

@@ -33,7 +33,58 @@
     $tipo="comida";
      ?> 
 
+<style type="text/css">
+   .clearfix{
+     background: white;
+  box-shadow: rgba(0,0,0,0.05) 0 3px 3px 0;
+  margin: 0 20px 20px;
+  
+  position: relative;
+  font-size: 20px;
+  }
+  .comment {
+  background: white;
+  box-shadow: rgba(0,0,0,0.05) 0 3px 3px 0;
+  margin: 0 20px 20px;
+  padding: 20px;
+  position: relative;
+  font-size: 15px;
+}
 
+.comment-reply a{
+  color: white;
+}
+.comment-reply {
+  display: inline-block;
+  background-color: rgba(0, 0, 0, .7); /* pink */
+  color: white;
+  padding: 15px 20px;
+  font-size: 15px;
+  text-decoration: none;
+  margin-bottom: 20px;
+  transition: all 800ms cubic-bezier(.190, 1, .220, 1);
+  outline: 0;
+  position: relative;
+}
+
+.comment-reply:active,
+.comment-reply:focus,
+.comment-reply:hover {
+  background: rgba(0, 0, 0, 1); /* pink 10% dark */
+}
+
+
+.comment .comment-reply {
+  padding: 5px 10px;
+  font-size: 13px;
+  margin-bottom: 0;
+  float: right;
+  padding-left: 15px;
+}
+.comment span{
+  float: right;
+}
+</style>
   <div class="content clearfix"<?php print $content_attributes; ?>>
     <?php
       // We hide the comments and links now so that we can render them later.
@@ -46,7 +97,6 @@
       $url= $_SERVER["REQUEST_URI"];
       $urlfinal= "http://" . $host .base_path();
       
-
     ?>
     
     <!--<?php foreach ($node->field_imagen['und'] as $fotos) { 
@@ -64,7 +114,7 @@
  <?php if(isset($estre)){?>
 
   <form  method="POST" action="<?php print url("valorar/valor"); ?>">
-  <h2>Califica la comida:</h2>   
+  <h3>Califica la comida</h3>   
    <p class="clasificacion">
       <input id="radio1" type="radio" name="estrellas" value="5" <?php if($estre==5){print "checked";}?>  onclick="enviarEstrellas(jQuery('#radio1').val())" <?php if(!user_is_logged_in()){ print "disabled";} ?>><!--
     --><label for="radio1">★</label><!--
@@ -90,10 +140,7 @@
 <?php }?>
 
 <script>
-  jQuery(document).ready(function($) { 
-jQuery("#mensaje").hide();
-jQuery("#mensaje2").hide();
-});
+ 
 function enviarEstrellas(valor){
     <?php if(user_is_logged_in()){?>
     var parametros ={
@@ -102,8 +149,8 @@ function enviarEstrellas(valor){
       "tipo": "comida",
       "uid": "<?php print $user->uid ;?>",
     }; 
-    jQuery("#mensaje").show();
-    document.getElementById("mensaje").innerHTML = "Gracias por su valoracion!";
+    jQuery("#myModal").modal('show');
+    //document.getElementById("mensaje").innerHTML = "Gracias por su valoracion!";
     
        jQuery.ajax({
                 data:  parametros, //datos que se envian a traves de ajax
@@ -116,14 +163,13 @@ function enviarEstrellas(valor){
   }
   <?php if(!user_is_logged_in()){?>
       jQuery(".clasificacion").click(function() {
-        jQuery("#mensaje2").show();
-     document.getElementById("mensaje2").innerHTML = "Registrese para valorar";
+        jQuery("#myModal").modal('show');
+     
     });
     <?php } ?>
 </script>
 
 	<?php 
-
 	if(user_is_logged_in()){?>
     <form method="POST" action="<?php print url("registrar/mensaje"); ?>" style="clear: both; float: left">
     	<?php 
@@ -132,7 +178,6 @@ function enviarEstrellas(valor){
 		$term=sacarTipoComida($node->nid);
     	$fecha= date("Y-m-d H:i:s");
     	$cal= $node->field_calorias['und'][0]['value'];
-
     ?>	
 
     
@@ -149,11 +194,36 @@ function enviarEstrellas(valor){
 
    
 	<?php }?>
+  <div class="modal fade" id="myModal" role="dialog">
+    <div class="modal-dialog">
+    
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">Valoracion</h4>
+        </div>
+        <div class="modal-body">
+          <?php  if(!user_is_logged_in()){
+            print "<p>Registre para valorar</p>";
+          }else{
+ print "<p>Gracias por valorar</p>";
+          }?>
+
+          
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+        </div>
+      </div>
+      
+    </div>
+  </div>
+<button id="imprimir"class='btn btn-danger' style="clear:both; float: left; margin-top: 2%">Imprimir receta</button>
+
   </div>
   <br />
-   <h3 id="mensaje" class="alert alert-success"></h3>
-<h3 id="mensaje2" class="alert alert-warning"></h3>
-<button id="imprimir"class='btn btn-danger'>Imprimar receta</button>
+   
   <script type="text/javascript">
     
       jQuery("#imprimir").click(function(){
@@ -161,9 +231,9 @@ function enviarEstrellas(valor){
       window.open(url, '_blank');
        
     });
+
   </script>
   <?php
-
     // Remove the "Add new comment" link on the teaser page or if the comment
     // form is being displayed on the same page.
     if ($teaser || !empty($content['comments']['comment_form'])) {

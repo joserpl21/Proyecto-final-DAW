@@ -6,6 +6,7 @@ body {
   color: #333333;
   background: #fff;
   padding: 0px;
+  background: #f2f2f2;
 }
 a {
   color: #005192;
@@ -148,7 +149,6 @@ label:hover ~ label {
 }
 #block-views-mejores-comidas-block-1 h3 {
   max-width: 220px;
-  min-height: 54px;
   position: relative;
   font-family: 'FuturaBT-Bold';
   text-transform: uppercase;
@@ -156,7 +156,7 @@ label:hover ~ label {
   line-height: 18px;
   margin-bottom: 6px;
 }
-#block-views-mejores-comidas-block-1 h3 a {
+#block-views-mejores-comidas-block-1 h3 views-field-title {
   color: #333333;
 }
 #block-views-mejores-comidas-block-1 h3 a:hover {
@@ -189,7 +189,7 @@ label:hover ~ label {
   color: #a78c20;
 }
 #block-views-mejores-comidas-block-1 .views-row {
-  width: 24%;
+  width: 32%;
   float: left;
   padding: 0;
   margin-right: 15px;
@@ -234,7 +234,6 @@ block-views-mejores-ejercicios-block-1 #block-views-mejores-ejercicios-block-1 h
 }
 #block-views-mejores-ejercicios-block-1 h3 {
   max-width: 220px;
-  min-height: 54px;
   position: relative;
   font-family: 'FuturaBT-Bold';
   text-transform: uppercase;
@@ -270,7 +269,7 @@ block-views-mejores-ejercicios-block-1 #block-views-mejores-ejercicios-block-1 h
   text-decoration: line-through;
 }
 #block-views-mejores-ejercicios-block-1 .views-row {
-  width: 24%;
+  width: 32%;
   float: left;
   padding: 0;
   margin-right: 15px;
@@ -306,8 +305,10 @@ block-views-mejores-ejercicios-block-1 #block-views-mejores-ejercicios-block-1 h
   background-size: 15px;
   margin-right: 5px;
 }
---------------------------------------------------------------------------------- --------------------------------------------------------------------------------- .comment {
-  margin-left: 18px;
-  float: right;
-  color: #a78c20;
+--------------------------------------------------------------------------------- --------------------------------------------------------------------------------- .view view-comidas-vegetarianas .view-id-comidas_vegetarianas view-display-id-page {
+  background-color: red;
+}
+.view-comidas-vegetarianas .views-row-last {
+  border-bottom: none;
+  padding: 20px 0 0;
 }

@@ -26,9 +26,11 @@ switch ($_POST['accion']) {
 		header("Location:".url("cuenta/mensajes")."?borrar=bien");
 		break;
 	default:
-	variable_set('destinatario', '');
+	
 	break;
-}}
+}}else{
+	variable_set('destinatario', '');
+}
 
 Global $user;
 
@@ -51,7 +53,7 @@ $form['emisor'] = array(
 '#title' => t('nombre'),
 '#value'=>$nombre,
 );
-$fecha=  date("Y-m-d h:i:s");
+$fecha=  date("Y-m-d H:i:s");
 $form['fecha'] = array(
 '#type' => 'hidden',
 '#title' => t('fecha'),

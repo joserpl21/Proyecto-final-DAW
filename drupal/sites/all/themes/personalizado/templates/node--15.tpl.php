@@ -76,7 +76,7 @@
              foreach ($c as $se => $e) {
           if($se=="fecha"){
           $s=new DateTime($e);
-                $fecha = $s->format('Y-m-d H:i:s');            
+                $fecha = $s->format('Y-m-d h:i:s');            
             
           }
           if($se=="nombre_actividad"){

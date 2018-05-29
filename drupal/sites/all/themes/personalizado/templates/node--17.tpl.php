@@ -45,9 +45,15 @@
     print "<div class='alert alert-info'>Mensaje enviado</div>";
   }
   if(isset($misMensajes) && !empty($misMensajes)){
-    print "<button type='button' class='btn btn-info' data-toggle='collapse' data-target='#com'>Buson de entrada</button>";
-      print "<div id='com' class='collapse'>";
-   print "<table class='table'>
+  	if(isset($_GET['borrar'])){
+ 	print "<button type='button' class='btn btn-info' data-toggle='collapse' data-target='#com'>Buson de entrada</button>";
+    print "<div id='com' class='collapse in'>";
+  	}else{
+  		 print "<button type='button' class='btn btn-info' data-toggle='collapse' data-target='#com'>Buson de entrada</button>";
+    print "<div id='com' class='collapse'>";
+  	}
+   
+    print "<table class='table'>
       <tr><td>De</td></td><td>Mensaje</td><td>fecha</td></tr>";
        
       foreach ($misMensajes as $mensaje => $mensa) {       
@@ -62,7 +68,7 @@
           }
           if($se=='fecha'){
             $fechaBuena=new DateTime($e);
-                $prueba = $fechaBuena->format('d-m-Y h:i:s');
+                $prueba = $fechaBuena->format('d-m-Y H:i:s');
             print "<th>$prueba</th>"; 
           }
           if($se!='cod_mensaje' && $se!='receptor' && $se!='fecha'){
@@ -78,20 +84,29 @@
       
       print "</table>";
       print "</div>";
+  }else{
+  	print "<div class='alert alert-info'>No tiene mensajes recibidos</div>" ;
   }
   ?>
 <?php
     $misMensajes=db_query("SELECT * FROM mensajes WHERE emisor=:nombre",array(':nombre'=>$nombre))->fetchAll();
-  if(isset($_GET['borrar'])){
-    print "<div class='alert alert-info'>Mensaje borrado</div>";
-  }
+  //if(isset($_GET['borrar'])){
+  //  print "<div class='alert alert-info'>Mensaje borrado</div>";
+  //}
   if(isset($_GET['enviado'])){
     print "<div class='alert alert-info'>Mensaje enviado</div>";
   }
   if(isset($misMensajes) && !empty($misMensajes)){
-    print "<button type='button' class='btn btn-info' data-toggle='collapse' data-target='#env'>Mensajes Enviados</button>";
+  	if(isset($_GET['borrar'])){
+ 	print "<button type='button' class='btn btn-info' data-toggle='collapse' data-target='#env'>Mensajes Enviados</button>";
+      print "<div id='env' class='collapse in'>";
+  	}else{
+  		 print "<button type='button' class='btn btn-info' data-toggle='collapse' data-target='#env'>Mensajes Enviados</button>";
       print "<div id='env' class='collapse'>";
-   print "<table class='table'>
+
+  	}
+   
+        print "<table class='table'>
       <tr><td>Para</td></td><td>Mensaje</td><td>fecha</td></tr>";
        
       foreach ($misMensajes as $mensaje => $mensa) {       
@@ -122,9 +137,10 @@
       
       print "</table>";
       print "</div>";
+  }else{
+  	print "<div class='alert alert-info'>No ha enviado ningun mensaje</div>" ;
   }
   ?>
-  <div class="alert alert-info" id="demo"></div>
   
   <a href="<?php print url('/mensaje/form1'); ?>">Escribir nuevo mensaje</a>
 	 
@@ -135,10 +151,10 @@
         if(!$("tr:nth-child(1)").length){
            $("#tabla").hide();
             
-            document.getElementById("demo").innerHTML = "No hay mensajes";
-          }else{
-              $("#demo").hide();
+           
           }
+
+        
       });
     </script>
 
