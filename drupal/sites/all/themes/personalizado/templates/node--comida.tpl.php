@@ -21,6 +21,7 @@
   <?php endif; ?>
  <?php 
   $host1= "http://".$_SERVER["HTTP_HOST"]. base_path()."valorar/valor";
+  
    if(user_is_logged_in()){
     
      global $user;
@@ -34,14 +35,7 @@
      ?> 
 
 <style type="text/css">
-   .clearfix{
-     background: white;
-  box-shadow: rgba(0,0,0,0.05) 0 3px 3px 0;
-  margin: 0 20px 20px;
-  
-  position: relative;
-  font-size: 20px;
-  }
+   
   .comment {
   background: white;
   box-shadow: rgba(0,0,0,0.05) 0 3px 3px 0;
@@ -50,7 +44,6 @@
   position: relative;
   font-size: 15px;
 }
-
 .comment-reply a{
   color: white;
 }
@@ -66,14 +59,11 @@
   outline: 0;
   position: relative;
 }
-
 .comment-reply:active,
 .comment-reply:focus,
 .comment-reply:hover {
   background: rgba(0, 0, 0, 1); /* pink 10% dark */
 }
-
-
 .comment .comment-reply {
   padding: 5px 10px;
   font-size: 13px;
@@ -84,6 +74,8 @@
 .comment span{
   float: right;
 }
+
+
 </style>
   <div class="content clearfix"<?php print $content_attributes; ?>>
     <?php
@@ -95,8 +87,10 @@
       print render($content);
       $host= $_SERVER["HTTP_HOST"];
       $url= $_SERVER["REQUEST_URI"];
-      $urlfinal= "http://" . $host .base_path();
+      $urlfinal= "http://" . $host.$url;
+	  $impri="http://" . $host .base_path();
       
+	 
     ?>
     
     <!--<?php foreach ($node->field_imagen['und'] as $fotos) { 
@@ -170,7 +164,17 @@ function enviarEstrellas(valor){
 </script>
 
 	<?php 
-	if(user_is_logged_in()){?>
+	//if($urlfinal!="http://jjml.xyz/drupal/"){
+
+	if($urlfinal!="http://jjml.xyz/drupal/" && $urlfinal!="http://jjml.xyz/drupal/tipo-de-comidas/comidas-omnivoro" &&
+	$urlfinal!="http://jjml.xyz/drupal/tipo-de-comidas/comidas-veganas" && $urlfinal!="http://jjml.xyz/drupal/tipo-de-comidas/comidas-vegetarianas"){?>
+    <style type="text/css">
+      .field-name-field-imagen .img-responsive{
+      float: right;
+    }
+
+    </style>
+    <?php if(user_is_logged_in()) {?>
     <form method="POST" action="<?php print url("registrar/mensaje"); ?>" style="clear: both; float: left">
     	<?php 
 	
@@ -193,7 +197,7 @@ function enviarEstrellas(valor){
     </form>
 
    
-	<?php }?>
+	
   <div class="modal fade" id="myModal" role="dialog">
     <div class="modal-dialog">
     
@@ -220,18 +224,18 @@ function enviarEstrellas(valor){
     </div>
   </div>
 <button id="imprimir"class='btn btn-danger' style="clear:both; float: left; margin-top: 2%">Imprimir receta</button>
-
+<?php }?>
+	<?php }?>
   </div>
   <br />
    
   <script type="text/javascript">
     
       jQuery("#imprimir").click(function(){
-      var url="<?php print $urlfinal ?>/print/<?php print $node->nid ?>";
+      var url="<?php print $impri ?>/print/<?php print $node->nid ?>";
       window.open(url, '_blank');
        
     });
-
   </script>
   <?php
     // Remove the "Add new comment" link on the teaser page or if the comment
@@ -243,9 +247,7 @@ function enviarEstrellas(valor){
     $links = render($content['links']);
     if ($links):
   ?>
-    <div class="link-wrapper">
-      <?php print $links; ?>
-    </div>
+    
   <?php endif; ?>
 
   <?php print render($content['comments']); ?>

@@ -41,11 +41,15 @@
       hide($content['field_texto_imagenes_slider']);
       hide($content['field_imagen_slider']);
       print render($content);
-
-
-
+	  $host= $_SERVER["HTTP_HOST"];
+      $url= $_SERVER["REQUEST_URI"];
+      $urlfinal= "http://" . $host.$url;
+      //print "<div id='body'>".$node->body['und'][0]['value']."</div>";
+      //print "<img  class='img-thumbnail'src='".image_style_url('medium',$node->field_imagen['und'][0]['uri'])."'/>";
+      
     ?>
   <style type="text/css">
+
      .clearfix{
      background: white;
   box-shadow: rgba(0,0,0,0.05) 0 3px 3px 0;
@@ -124,7 +128,32 @@
 <?php }?>
 	<?php 
 
-	if(user_is_logged_in()){?>
+	if($urlfinal!="http://jjml.xyz/drupal/" && $urlfinal!="http://jjml.xyz/drupal/tipo-ejercicios/aer%C3%B3bico"
+	&& $urlfinal!="http://jjml.xyz/drupal/tipo-ejercicios/anaerobico" && $urlfinal!="http://jjml.xyz/drupal/tipo-ejercicios/flexibilidad" && $urlfinal!="http://jjml.xyz/drupal/tipo-ejercicios/fuerza"){?>
+
+    <style type="text/css">
+      
+      .field-name-field-imagen .img-responsive{
+      float: right;
+      margin-top: 3%
+      }
+      .field-type-youtube{
+          margin-top: 10%;
+          text-align: center;
+      
+      }
+      .field-name-body{ margin-top: 3%;}
+      @media ( max-width: 400px ){
+        .ytp-hide-controls{
+          width: 50%;
+        }
+        .exp-responsive{
+          background-color: white;
+        }
+      }
+      
+    </style>
+    <?php if(user_is_logged_in()){?>
    <form method="POST" action="<?php print url("registrar/mensaje")?>"; name='registrar' style="clear: both; float: left" ">
     	<?php 
 			global $user;
@@ -159,7 +188,7 @@
 
       </div>
     </form>
-    
+    <?php }?>
 	<?php }
 
   ?>
@@ -238,7 +267,7 @@ function enviarEstrellas(valor){
     if ($links):
   ?>
     <div class="link-wrapper">
-      <?php print $links; ?>
+      
     </div>
   <?php endif; ?>
 

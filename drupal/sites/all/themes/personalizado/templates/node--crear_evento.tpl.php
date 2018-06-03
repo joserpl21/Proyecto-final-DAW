@@ -25,7 +25,9 @@
       <?php print $submitted; ?>
     </div>
   <?php endif; ?>
-
+<style type="text/css">
+  
+</style>
   <div class="content clearfix"<?php print $content_attributes; ?>>
       <?php
       // We hide the comments and linksn ow so that we can render them later.
@@ -37,11 +39,15 @@
       hide($content['field_invitar']);
       $cant=db_query("SELECT field_part_value from field_data_field_part where entity_id=:id",array(':id'=>$node->nid))->fetchField();
       $participantes=db_query("SELECT participante FROM `participantes`where cod_evento=:cod",array(':cod'=>$node->nid))->fetchCol();
-      
+      $host= $_SERVER["HTTP_HOST"];
+      $url= $_SERVER["REQUEST_URI"];
+      $urlfinal= "http://" . $host . $url;
+      $urlComp="http://". $host."/drupal/";
     ?>
-      <h3>Nº Participantes</h3>       
-    <?php
+      <h3>Nº Participantes</h3> 
 
+    <?php
+    
       print $cant."<br />";
     $v=db_query("SELECT log FROM node_revision WHERE vid=:vid",array(':vid'=>$node->nid))->fetchField();
     
@@ -75,7 +81,7 @@
     }
       
     
-
+ if($urlfinal!=$urlComp && $urlfinal!="http://jjml.xyz/drupal/eventos"){
     if(user_is_logged_in()){
      global $user;
     $usuario = $user->name;}     
@@ -97,9 +103,8 @@
       print "</div>";
     }
 
-
-	   if(user_is_logged_in()&& isset($user)){
-    
+   
+	   if(user_is_logged_in()&& isset($user)){    
       ?> 
 
       <form action="<?php print url("participar/registrar"); ?>" method="POST">
@@ -116,7 +121,7 @@
       </form>
 <?php
      }
-
+}
     ?>
 
 

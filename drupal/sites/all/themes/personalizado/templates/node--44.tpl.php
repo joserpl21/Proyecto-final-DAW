@@ -7,7 +7,7 @@
     </div>
   <?php endif; ?>
 
-
+  <div class="content clearfix"<?php print $content_attributes; ?>>
     <?php
       // We hide the comments and links now so that we can render them later.
       hide($content['comments']);
@@ -21,30 +21,30 @@
   <div id="cont" class="container">
   <div class="row">
     <div class="col-sm-6" >
-      <img class="img-thumbnail" src="<?php print image_style_url("large",$node->field_image['und'][0]['uri']) ?>" alt="Ejercicio aeróbico" style="width:100%"/>
+      <img class="img-thumbnail" src="<?php print image_style_url("medium",$node->field_image['und'][0]['uri']) ?>" alt="Ejercicio aeróbico" style="width:100%"/>
 		<div class="middle">
-    <a href="<?php print url('/tipo-ejercicios/aeróbico'); ?>"><div class="text">Ejercicio aeróbico</div></a>
+    <div class="text"><a href="<?php print url('/tipo-ejercicios/aeróbico'); ?>">Ejercicio aeróbico</a></div>
   </div>
 	</div>
     <div class="col-sm-6" >	
-	<img class="img-thumbnail" src="<?php print image_style_url("large",$node->field_image['und'][2]['uri']) ?>" alt="Ejercicios de flexibilidad" style="width:100%" />
+	<img class="img-thumbnail" src="<?php print image_style_url("medium",$node->field_image['und'][2]['uri']) ?>" alt="Ejercicios de flexibilidad" style="width:100%" />
     <div class="middle">
-    <a href="<?php print url('/tipo-ejercicios/flexibilidad'); ?>"><div class="text">Ejercicios de flexibilidad</div></a>
+    <div class="text"><a href="<?php print url('/tipo-ejercicios/flexibilidad'); ?>">Ejercicios de flexibilidad</a></div>
 		</div>
 	</div>
   </div>
    <div class="row">
     <div class="col-sm-6" >
-      <img class="img-thumbnail" src="<?php print image_style_url("large",$node->field_image['und'][1]['uri']) ?>" alt="Ejercicio anaeróbico" style="width:100%" />
+      <img class="img-thumbnail" src="<?php print image_style_url("medium",$node->field_image['und'][1]['uri']) ?>" alt="Ejercicio anaeróbico" style="width:100%" />
     <div class="middle">
-    <a href="<?php print url('/tipo-ejercicios/anaerobico'); ?>"><div class="text">Ejercicio anaeróbico</div></a>
+    <div class="text"><a href="<?php print url('/tipo-ejercicios/anaerobico'); ?>">Ejercicio anaeróbico</a></div>
   </div>
 	</div>
    
 	 <div class="col-sm-6" >	
-	<img class="img-thumbnail" src="<?php print image_style_url("large",$node->field_image['und'][3]['uri']) ?>" alt="Ejercicios de fuerza" style="width:100%"/>
+	<img class="img-thumbnail" src="<?php print image_style_url("medium",$node->field_image['und'][3]['uri']) ?>" alt="Ejercicios de fuerza" style="width:100%"/>
     <div class="middle">
-    <a href="<?php print url('/tipo-ejercicios/fuerza'); ?>"><div class="text">Ejercicios de fuerza</div></a>
+    <div class="text"><a href="<?php print url('/tipo-ejercicios/fuerza'); ?>">Ejercicios de fuerza</a></div>
 		</div>
 	</div>
   </div>
@@ -99,7 +99,8 @@ color:white;
       
    
 	<?php }?>
- 
+  </div>
+
   <?php
     // Remove the "Add new comment" link on the teaser page or if the comment
     // form is being displayed on the same page.

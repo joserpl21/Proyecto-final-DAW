@@ -32,15 +32,17 @@
   <div id="cont" class="container">
   <div class="row">
     <div class="col-sm-6" >
+    	
       <img class="img-thumbnail" src="<?php print image_style_url("large",$node->field_image['und'][0]['uri']) ?>" alt="Comidas Omnivoras" />
+      
 		<div class="middle">
-    <div class="text"><a href="<?php print url('/tipo-de-comidas/comidas-omnivoro'); ?>">Omnivoras</a></div>
+    <a href="<?php print url('/tipo-de-comidas/comidas-omnivoro'); ?>"><div class="text">Omnivoras</div></a>
   </div>
 	</div>
     <div class="col-sm-6" >
       <img class="img-thumbnail" src="<?php print image_style_url("large",$node->field_image['und'][1]['uri']) ?>" alt="Comidas Veganas" />
     <div class="middle">
-    <div class="text"><a href="<?php print url('/tipo-de-comidas/comidas-veganas'); ?>">Veganas</a></div>
+    <a href="<?php print url('/tipo-de-comidas/comidas-veganas'); ?>"><div class="text">Veganas</div></a>
   </div>
 	</div>
   </div>
@@ -50,7 +52,7 @@
 		<img class="img-thumbnail" src="<?php print image_style_url("large",$node->field_image['und'][2]['uri']) ?>" alt="Comidas Vegetarianas" />
 	 </div>
     <div class="middle">
-    <div class="text"><a href="<?php print url('/tipo-de-comidas/comidas-vegetarianas'); ?>">Vegetarianas</a></div>
+   <a href="<?php print url('/tipo-de-comidas/comidas-vegetarianas'); ?>"><div class="text">Vegetarianas</div></a>
 		</div>
 	</div>
   </div>

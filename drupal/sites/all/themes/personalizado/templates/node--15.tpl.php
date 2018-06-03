@@ -40,7 +40,7 @@
       $buscar2=$_GET['nombre2'];}
     
       if(isset($buscar) &&  !empty($buscar)){
-      $comidas=db_query("Select * FROM registro where uid=:uid and actividad='comida' and nombre_actividad like :nombact order by fecha DESC",array(':usuario'=>$user->uid,':nombact'=>"%$buscar%"))->fetchAll();
+      $comidas=db_query("Select * FROM registro where uid=:uid and actividad='comida' and nombre_actividad like :nombact order by fecha DESC",array(':uid'=>$user->uid,':nombact'=>"%$buscar%"))->fetchAll();
         }else{
            $comidas=db_query("Select * FROM registro where uid=:uid and actividad='comida' order by fecha DESC",array(':uid'=>$user->uid))->fetchAll();
         }
@@ -76,7 +76,7 @@
              foreach ($c as $se => $e) {
           if($se=="fecha"){
           $s=new DateTime($e);
-                $fecha = $s->format('Y-m-d h:i:s');            
+                $fecha = $s->format('d-m-Y H:i:s');            
             
           }
           if($se=="nombre_actividad"){
@@ -139,7 +139,7 @@
         foreach ($c as $se => $e) {
            if($se=="fecha"){
             $s=new DateTime($e);
-            $fecha = $s->format('Y-m-d H:i:s');
+            $fecha = $s->format('d-m-Y H:i:s');
           }
           if($se=="nombre_actividad"){
            $nomAct=$e; 
@@ -309,60 +309,4 @@
 
   <?php print render($content['comments']); ?>
     
-<!--function buscador2(){
-  var busqueda=jQuery('form#buscador #edit-search-block-form--2').val();
-     //Si el campo de busqueda no esta vacío
-  if(busqueda!=''){
-    //cogemos la url actual
-    var url = jQuery(location).attr('href');
-    
-    //cogemos los parametros de busqueda
-    var URLsearch = window.location.search;
-    //comprobamos que hay parametros de busqueda
-    if(URLsearch!=''){
-      //miramos si ya hemos buscado antes el título
-      if(URLsearch.indexOf("title=")!=-1){
-        //sustituimos la url entera con la url limpia sin parametros de busqueda
-        var urlLimpia=url.split('?');
-        url=urlLimpia[0]+'?';
-        //miramos si tiene más de un parametro
-        if(URLsearch.indexOf('&')!=-1){
-              //si los tiene, los almacenamos en un array
-            var cadena=URLsearch.split("&"); 
-            var contador=0;
-            //recorremos el array para completar la cadena
-            for (c in cadena){
-              //miramos si el array contiene ya el titulo. Si no simplemente se añadirá el título detrás
-              if(cadena[c].indexOf("title=")==-1){
-                //si no lo contiene, vamos repasando parametro con parametro y concatenandolos
-                var aux=cadena[c].replace('?','');
-                if(contador==0){
-                  url+=aux;
-                }else{
-                  url+='&'+aux;
-                }
-                contador++;
-              }
-            }
-        url+='&';
-            
-        }
-      
-      //si no hemos buscado nada, directamente lo añadimos.   
-      }else{
-        
-        url+='&';
-      }
-    //si no hay parametros de busqueda, directamente añadimos el titulo.
-    }else{
-      url+='?';
-    }
-    url+='title='+busqueda;
-     jQuery('#buscador').attr('action',url);
-       jQuery('#buscador').submit();
-  }else{
-    jQuery('.buscador .mensaje').html('Campo obligatorio.');
-    jQuery('.buscador #edit-search-block-form--2').addClass('error');
-  }
-}-->
 </div>

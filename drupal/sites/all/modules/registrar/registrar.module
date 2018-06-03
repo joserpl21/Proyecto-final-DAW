@@ -27,17 +27,19 @@ function registrar_actividad(){
 	$actividad=$_POST['actividad'];
 	$tipo_actividad=$_POST['tipo_actividad'];
 	$usuario=$_POST['uid'];	
+	watchdog("Ver calorias", print_r($caloria,1));
+	
 	$duracion=$_POST['duracion'];
 	$url=$_POST['ruta'];
-	if(isset($duracion)){		
+	if(isset($duracion) && $duracion!=0){		
 	$peso=db_query("SELECT field_peso_value from field_data_field_peso where entity_id=:uid",array(':uid'=>$usuario))->fetchField();
 	$calPerdidas= ($peso * $caloria * $duracion);
-	watchdog("Ver calorias", print_r($calPerdidas,1));
+	
 		
 	}else{
 		$duracion=0;
-		$calPerdidas=$calorias;
-	}
+		$calPerdidas=$caloria;
+		}
 	$resultado=db_query("INSERT INTO `registro`(uid, `fecha`, `nombre_actividad`, `cal`, `duracion`, `actividad`, `tipo_actividad`) 
 	VALUES (:uid,:fecha,:titulo,:caloria,:duracion,:actividad,:tipo_actividad)",array(':uid'=>$usuario,
 	':fecha'=>$fecha , ':titulo' => $titulo ,':caloria' =>$calPerdidas,':duracion'=>$duracion ,':actividad' => $actividad,

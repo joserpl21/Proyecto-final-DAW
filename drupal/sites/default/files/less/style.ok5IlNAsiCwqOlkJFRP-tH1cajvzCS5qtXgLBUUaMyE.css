@@ -1,0 +1,429 @@
+/*  Estilos globales 									    ----------------------------------------------------------------------------------------------------------------------  */
+body {
+  font-size: 22px;
+  line-height: 24px;
+  font-family: Arial;
+  color: #333333;
+  background: #fff;
+  padding: 0px;
+  background: #f2f2f2;
+}
+a {
+  color: #005192;
+  transition: color 0.5s ease;
+}
+a:hover {
+  color: #333333;
+  text-decoration: none;
+}
+a:link {
+  color: #005192;
+  text-decoration: none;
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  margin: 0px;
+  line-height: inherit;
+  font-weight: normal;
+}
+#toolbar {
+  box-shadow: none;
+  position: relative;
+  margin: 0px;
+  padding: 0px;
+}
+body.toolbar-drawer {
+  padding-top: 0px !important;
+}
+.nav {
+  margin: 0px;
+}
+/*  Header			  									    ----------------------------------------------------------------------------------------------------------------------  */
+/*  Main			  									    ----------------------------------------------------------------------------------------------------------------------  */
+/*  Footer
+ #header                                                         { padding: 24px 0 25px; position: relative; }
+    #header .col-md-2:first-child a                                 { display: block; margin-top: 6px; }
+    #header .col-md-7                                               { position: inherit; }
+
+    .navbar                                                         { min-height: inherit; margin: 10px 0 0; border: none; float: right;}
+    .navbar .nav > li                                               { margin-right: 20px; }
+    .navbar .nav > li:last-child                                    { margin-right: 0px; }
+    .navbar .nav > li > a                                           { font-family: 'FuturaBT-Bold'; padding: 0px; text-transform: uppercase; color: #333333; }
+    .navbar .nav > li.last a                                        { font-family: 'FuturaBT-Bold'; padding: 0px; text-transform: uppercase; color: #a78c20; }
+    .navbar .nav > li > a:hover,
+    .navbar .nav > li > a:focus                                     { background: none; color: #a78c20; }
+    .navbar .nav > li.last a:hover,
+    .navbar .nav > li.last a:focus                                  { background: none; color: #333; }
+    .navbar .nav > li .arrow--up                                    { border-bottom: 8px solid #ebeae9; border-left: 8px solid transparent; border-right: 8px solid transparent; height: 0; width: 0; margin: 20px auto 0; }
+
+    .navbar-toggle                                                  { position: absolute; top: 20px; right: 20px; margin: 0px; border: 1px solid #333333; border-radius: 0px; }
+    
+
+    #block-block-3                                                  { text-align: right; }
+    #block-block-3 > a                                              { border: 1px solid #666666; text-transform: uppercase; font-family: 'FuturaBT-Light'; padding: 5px 19px; margin-left: 6px; display: inline-block; color: #666666; }
+
+    .submenu                                                        { background: #ebeae9; padding: 20px; }
+    .submenu ul                                                     { padding-left: 0; list-style: none; margin-bottom: 0; }
+    .submenu ul li                                                  { display: inline-block; margin-right: 30px;}
+   
+
+    @media ( min-width: 991px ) and ( max-width: 1200px ){
+        #block-block-3 > a                                          { padding: 8px 16px; margin-left: 6px; }
+        .navbar .nav > li                       { margin-right: 15px; }
+    }
+    
+			  									    ----------------------------------------------------------------------------------------------------------------------  */
+.easy-breadcrumb {
+  text-align: center;
+}
+input[type="radio"] {
+  display: none;
+}
+label {
+  color: grey;
+}
+#form {
+  width: 250px;
+  margin: 0 auto;
+  height: 50px;
+}
+#form p {
+  text-align: center;
+}
+.clasificacion label {
+  font-size: 60px !importand;
+}
+#val input[type="radio"] {
+  display: none;
+}
+#val label {
+  color: grey;
+}
+.clasificacion {
+  direction: rtl;
+  unicode-bidi: bidi-override;
+  float: left;
+}
+#val label:hover,
+label:hover ~ label {
+  color: orange;
+}
+#val input[type="radio"]:checked ~ label {
+  color: orange;
+}
+--------------------------------------------------------------------------------- #block-views-mejores-comidas-block-1 h2 {
+  padding: 12px 20px;
+  display: block;
+  font-family: 'FuturaBT-Bold';
+  text-transform: uppercase;
+  font-size: 16px;
+  line-height: 18px;
+  margin-bottom: 10px;
+}
+#block-views-mejores-comidas-block-1 {
+  border-bottom: 2px solid #dcdcdc;
+  margin-bottom: 0px;
+  margin-top: 30px;
+}
+#block-views-mejores-comidas-block-1 h2 {
+  padding: 12px 20px;
+  display: block;
+  font-family: 'FuturaBT-Bold';
+  text-transform: uppercase;
+  font-size: 16px;
+  line-height: 18px;
+  margin-bottom: 10px;
+}
+#block-views-mejores-comidas-block-1 .box {
+  margin: 16px 0 17px;
+  padding: 0px 15px 0px 30px;
+  display: inline-block;
+  width: 100%;
+  border-left: 2px solid #dcdcdc;
+}
+#block-views-mejores-comidas-block-1 h3 {
+  max-width: 220px;
+  position: relative;
+  font-family: 'FuturaBT-Bold';
+  text-transform: uppercase;
+  font-size: 16px;
+  line-height: 18px;
+  margin-bottom: 6px;
+}
+#block-views-mejores-comidas-block-1 h3 a:hover {
+  color: #a78c20;
+}
+#block-views-mejores-comidas-block-1 .marca {
+  display: block;
+  font-size: 15px;
+  line-height: 17px;
+  color: #666666;
+  margin-bottom: 8px;
+  min-height: 17px;
+}
+#block-views-mejores-comidas-block-1 .precio_coste {
+  float: right;
+  text-decoration: line-through;
+}
+#block-views-mejores-comidas-block-1 .precio_venta {
+  margin-left: 18px;
+  float: right;
+  color: #a78c20;
+}
+#block-views-mejores-comidas-block-1 .views-row {
+  width: 32%;
+  float: left;
+  padding: 0;
+  margin-right: 15px;
+}
+@media (max-width: 400px) {
+  #block-views-mejores-comidas-block-1 .views-row {
+    width: 100%;
+  }
+}
+#block-views-mejores-comidas-block-1 .views-row-last {
+  margin-right: 0;
+}
+#block-views-mejores-comidas-block-1 .views-row-last .box {
+  border-right: 2px solid #dcdcdc;
+}
+block-views-mejores-ejercicios-block-1 #block-views-mejores-ejercicios-block-1 h2 {
+  padding: 12px 20px;
+  display: block;
+  font-family: 'FuturaBT-Bold';
+  text-transform: uppercase;
+  font-size: 16px;
+  line-height: 18px;
+  margin-bottom: 10px;
+}
+#block-views-mejores-ejercicios-block-1 {
+  border-bottom: 2px solid #dcdcdc;
+  margin-bottom: 0px;
+  margin-top: 30px;
+}
+#block-views-mejores-ejercicios-block-1 h2 {
+  padding: 12px 20px;
+  display: block;
+  font-family: 'FuturaBT-Bold';
+  text-transform: uppercase;
+  font-size: 16px;
+  line-height: 18px;
+  margin-bottom: 10px;
+}
+#block-views-mejores-ejercicios-block-1 .box {
+  margin: 16px 0 17px;
+  padding: 0px 15px 0px 30px;
+  display: inline-block;
+  width: 100%;
+  border-left: 2px solid #dcdcdc;
+}
+#block-views-mejores-ejercicios-block-1 h3 {
+  max-width: 220px;
+  position: relative;
+  font-family: 'FuturaBT-Bold';
+  text-transform: uppercase;
+  font-size: 16px;
+  line-height: 18px;
+  margin-bottom: 6px;
+}
+#block-views-mejores-ejercicios-block-1 h3 a:hover {
+  color: #a78c20;
+}
+#block-views-mejores-ejercicios-block-1 .marca {
+  display: block;
+  font-size: 15px;
+  line-height: 17px;
+  color: #666666;
+  margin-bottom: 8px;
+  min-height: 17px;
+}
+#block-views-mejores-ejercicios-block-1 .precio_coste {
+  float: right;
+  text-decoration: line-through;
+}
+#block-views-mejores-ejercicios-block-1 .views-row {
+  width: 32%;
+  float: left;
+  padding: 0;
+  margin-right: 15px;
+}
+#block-views-mejores-ejercicios-block-1 .views-row-last {
+  margin-right: 0;
+}
+#block-views-mejores-ejercicios-block-1 .views-row-last .box {
+  border-right: 2px solid #dcdcdc;
+}
+--------------------------------------------------------------------------------- #block-views-mejores-eventos-block-1 h2 {
+  padding: 12px 20px;
+  display: block;
+  font-family: 'FuturaBT-Bold';
+  text-transform: uppercase;
+  font-size: 16px;
+  line-height: 18px;
+  margin-bottom: 10px;
+}
+#block-views-mejores-eventos-block-1 {
+  border-bottom: 2px solid #dcdcdc;
+  margin-bottom: 0px;
+  margin-top: 30px;
+}
+#block-views-mejores-eventos-block-1 h2 {
+  padding: 12px 20px;
+  display: block;
+  font-family: 'FuturaBT-Bold';
+  text-transform: uppercase;
+  font-size: 16px;
+  line-height: 18px;
+  margin-bottom: 10px;
+}
+#block-views-mejores-eventos-block-1 .box {
+  margin: 16px 0 17px;
+  padding: 0px 15px 0px 30px;
+  display: inline-block;
+  width: 100%;
+  border-left: 2px solid #dcdcdc;
+}
+#block-views-mejores-eventos-block-1 h3 {
+  max-width: 220px;
+  position: relative;
+  font-family: 'FuturaBT-Bold';
+  text-transform: uppercase;
+  font-size: 16px;
+  line-height: 18px;
+  margin-bottom: 6px;
+}
+#block-views-mejores-eventos-block-1 h3 a:hover {
+  color: #a78c20;
+}
+#block-views-mejores-eventos-block-1 .marca {
+  display: block;
+  font-size: 15px;
+  line-height: 17px;
+  color: #666666;
+  margin-bottom: 8px;
+  min-height: 17px;
+}
+#block-views-mejores-eventos-block-1 .precio_coste {
+  float: right;
+  text-decoration: line-through;
+}
+#block-views-mejores-eventos-block-1 .precio_venta {
+  margin-left: 18px;
+  float: right;
+  color: #a78c20;
+}
+#block-views-mejores-eventos-block-1 .views-row {
+  width: 100%;
+  float: left;
+  padding: 0;
+  margin-right: 15px;
+}
+@media (max-width: 400px) {
+  #block-views-mejores-comidas-block-1 .views-row {
+    width: 100%;
+  }
+}
+#block-views-mejores-eventos-block-1 .views-row-last {
+  margin-right: 0;
+}
+#block-views-mejores-eventos-block-1 .views-row-last .box {
+  border-right: 2px solid #dcdcdc;
+}
+block-views-mejores-eventos-block-1 #block-views-mejores-eventos-block-1 h2 {
+  padding: 12px 20px;
+  display: block;
+  font-family: 'FuturaBT-Bold';
+  text-transform: uppercase;
+  font-size: 16px;
+  line-height: 18px;
+  margin-bottom: 10px;
+}
+#block-views-mejores-eventos-block-1 {
+  border-bottom: 2px solid #dcdcdc;
+  margin-bottom: 0px;
+  margin-top: 30px;
+}
+#block-views-mejores-eventos-block-1 h2 {
+  padding: 12px 20px;
+  display: block;
+  font-family: 'FuturaBT-Bold';
+  text-transform: uppercase;
+  font-size: 16px;
+  line-height: 18px;
+  margin-bottom: 10px;
+}
+#block-views-mejores-eventos-block-1 .box {
+  margin: 16px 0 17px;
+  padding: 0px 15px 0px 30px;
+  display: inline-block;
+  width: 100%;
+  border-left: 2px solid #dcdcdc;
+}
+#block-views-mejores-eventos-block-1 h3 {
+  max-width: 220px;
+  position: relative;
+  font-family: 'FuturaBT-Bold';
+  text-transform: uppercase;
+  font-size: 16px;
+  line-height: 18px;
+  margin-bottom: 6px;
+}
+#block-views-mejores-eventos-block-1 h3 a:hover {
+  color: #a78c20;
+}
+#block-views-mejores-eventos-block-1 .marca {
+  display: block;
+  font-size: 15px;
+  line-height: 17px;
+  color: #666666;
+  margin-bottom: 8px;
+  min-height: 17px;
+}
+#block-views-mejores-eventos-block-1 .precio_coste {
+  float: right;
+  text-decoration: line-through;
+}
+#block-views-mejores-eventos-block-1 .views-row {
+  width: 32%;
+  float: left;
+  padding: 0;
+  margin-right: 15px;
+}
+#block-views-mejores-eventos-block-1 .views-row-last {
+  margin-right: 0;
+}
+#block-views-mejores-eventos-block-1 .views-row-last .box {
+  border-right: 2px solid #dcdcdc;
+}
+.busqueda_avanzada {
+  margin-right: 0;
+  padding: 18px 10px;
+  background: #eae3d1 !important;
+  text-align: center;
+  width: 150px;
+  margin-bottom: 10px;
+  float: none;
+  width: 100%;
+}
+.busqueda_avanzada span {
+  color: #444444;
+  text-transform: uppercase;
+  font-size: 15px;
+  line-height: 17px;
+  font-family: 'FuturaBT-Bold';
+}
+.busqueda_avanzada input.lupa {
+  background: url(/drupal/sites/all/themes/personalizado/img/lupa.png) no-repeat left;
+  border: 0px;
+  width: 15px;
+  height: 15px;
+  background-size: 15px;
+  margin-right: 5px;
+}
+--------------------------------------------------------------------------------- --------------------------------------------------------------------------------- .view view-comidas-vegetarianas .view-id-comidas_vegetarianas view-display-id-page {
+  background-color: red;
+}

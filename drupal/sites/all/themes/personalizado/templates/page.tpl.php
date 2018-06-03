@@ -60,6 +60,7 @@
 .comment span{
   float: right;
 }
+
 </style>
 <div class="container">
 <nav class="navbar navbar-default">
@@ -74,9 +75,13 @@
    <?php if (!empty($primary_nav)): ?>
             <div class="navbar-collapse collapse">
                 <?php if (!empty($primary_nav)): ?>
-                    <?php print render($primary_nav); ?>
+
+                    <?php 
+
+
+                    print render($primary_nav); ?>
                 <?php endif; ?>
-         
+             
             </div>
         <?php endif; ?>
   </div>
@@ -136,10 +141,7 @@
            var url = "www.google.com"; 
             $(location).attr('href',url);
         });
-        $(".progress").hide();
-        //$(".permalink").hide();
-        //alert($(".permalink").val());
-
+            $(".progress").hide();
            $("#edit-locale").hide();
             $("#edit-contact").hide();
             $("#edit-timezone").hide();
@@ -151,19 +153,21 @@
             $(".form-item-print-pdf-size").hide();
             $(".form-item-print-pdf-orientation").hide();
             $(".submitted >.permalink").hide();
-           // $(".list-inline").hide();
-            
-            //if($(".easy-breadcrumb_segment").val()="Node"){
-             //   $(".easy-breadcrumb_segment").hide();
-            //}
-            //$(".easy-breadcrumb_segment-1").val();
-            //var pruba=jQuery('.easy-breadcrumb_segment-1').val();
-            //alert($("a .easy-breadcrumb_segment-1").val());
+            $(".view-mejores-ejercicios > #body").hide();
            if(!(".view").length){
             $(".btn-success").hide();
             }else{
                 $(".btn-success").show();
-            }          
+            }    
+
+            <?php if(user_is_logged_in()){
+                global $user;
+                $nombre=$user->name;
+              ?>
+                var nombre= "<?php print $nombre?>";
+                $(".navbar-collapse .last a").text('Usuario: '+nombre);
+            <?php } ?>
+
       });
 </script>
 
