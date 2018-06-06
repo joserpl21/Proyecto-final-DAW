@@ -195,9 +195,13 @@ function enviarEstrellas(valor){
 		<input type="hidden" name="tipo_actividad" value="<?php print $term;?>">
     	<input type="submit" name="registrar" value="Registrar" class="btn btn-success">
     </form>
-
-   
-	
+    <br>
+    
+   <?php }?>
+    <button id="imprimir"class='btn btn-danger' style="clear:both; float: left; margin-top: 2%">Imprimir receta</button>
+  <?php }?>
+ 
+	 </div>
   <div class="modal fade" id="myModal" role="dialog">
     <div class="modal-dialog">
     
@@ -223,10 +227,9 @@ function enviarEstrellas(valor){
       
     </div>
   </div>
-<button id="imprimir"class='btn btn-danger' style="clear:both; float: left; margin-top: 2%">Imprimir receta</button>
-<?php }?>
-	<?php }?>
-  </div>
+
+
+ 
   <br />
    
   <script type="text/javascript">

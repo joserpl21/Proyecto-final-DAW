@@ -105,7 +105,7 @@
 	<div id="val">
  <?php if(isset($estre)){?>
 	<form  method="POST" action="<?php print url("valorar/valor"); ?>">
-  <h3>Califica la comida</h3>   
+  <h3>Califica el ejercicio</h3>   
   <p class="clasificacion">
      <input id="radio1" type="radio" name="estrellas" value="5" <?php if($estre==5){print "checked";}?>  onclick="enviarEstrellas(jQuery('#radio1').val())" <?php if(!user_is_logged_in()){ print "disabled";} ?>><!--
     --><label for="radio1">★</label><!--
@@ -159,9 +159,11 @@
 			global $user;
 		$usuario = $user->uid;
 
-		$term=sacarTipoEjercicio($node->nid);
+		  $term=sacarTipoEjercicio($node->nid);
     	$fecha=  date("Y-m-d H:i:s");
+      if(isset($node->field_calorias['und'])){
     	$cal= $node->field_calorias['und'][0]['value'];
+      }
 	
     ?>	
 	
@@ -266,9 +268,7 @@ function enviarEstrellas(valor){
     $links = render($content['links']);
     if ($links):
   ?>
-    <div class="link-wrapper">
-      
-    </div>
+   
   <?php endif; ?>
 
   <?php print render($content['comments']); ?>
