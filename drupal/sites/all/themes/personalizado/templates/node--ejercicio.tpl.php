@@ -25,7 +25,7 @@
   <div class="content clearfix"<?php print $content_attributes; ?>>
     <?php
 	   if(user_is_logged_in()){
-      $host= "http://".$_SERVER["HTTP_HOST"]. base_path()."valorar/valor";
+      $host1= "http://".$_SERVER["HTTP_HOST"]. base_path()."valorar/valor";
   
      global $user;
     $usuario = $user->uid; 
@@ -100,6 +100,8 @@
 .comment span{
   float: right;
 } 
+
+
 
   </style>
 	<div id="val">
@@ -242,7 +244,7 @@ function enviarEstrellas(valor){
     //alert("El valor de la votacion es " + valor);
        jQuery.ajax({
                 data:  parametros, //datos que se envian a traves de ajax
-                url:   '<?php print $host; ?>', //archivo que recibe la peticion
+                url:   '<?php print $host1; ?>', //archivo que recibe la peticion
                 type:  'post'
               });
        

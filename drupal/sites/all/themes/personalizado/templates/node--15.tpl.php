@@ -37,7 +37,8 @@
       if(isset($_GET['nombre'])){
       $buscar=$_GET['nombre'];}
       if(isset($_GET['nombre2'])){
-      $buscar2=$_GET['nombre2'];}
+      $buscar2=$_GET['nombre2'];
+  		}
     
       if(isset($buscar) &&  !empty($buscar)){
       $comidas=db_query("Select * FROM registro where uid=:uid and actividad='comida' and nombre_actividad like :nombact order by fecha DESC",array(':uid'=>$user->uid,':nombact'=>"%$buscar%"))->fetchAll();
@@ -71,7 +72,7 @@
        <input type="submit" class="btn btn-dark" value="Quitar filtro" onclick="limpiar()">
        <?php 
       if(isset($comidas) && !empty($comidas)){
-      print "<table class='table'><tr><td>Fecha</td><td>Nombre Actividad</td><td>cal</td><td>Tipo</td></tr>";
+      print "<table class='table'><thead><tr><td>Fecha</td><td>Nombre Actividad</td><td>cal</td><td>Tipo</td></tr></thead><tbody>";
              foreach ($comidas as $co => $c) {       
              foreach ($c as $se => $e) {
           if($se=="fecha"){
@@ -101,6 +102,7 @@
 <th>$tipAct</th></tr>";
                 }
                 ?>
+                </tbody>
             </table>
             <?php }else{
               print "<div class='alert alert-info' style='margin-top 1%;'>No existen comidas con ese filtro!</div>";
@@ -171,7 +173,7 @@
             } 
     ?>
 	</div>
-<?php }elseif($buscar2){ ?>
+<?php }elseif(isset($buscar2)){ ?>
   <div class="alert alert-info">No hay ningun ejercicio con ese filtro!</div>
 <?php }else{?>
  <div class="alert alert-info">Aun no has registrado niguna ejercicio!</div>

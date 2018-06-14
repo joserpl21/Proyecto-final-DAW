@@ -29,15 +29,16 @@ function valorar_actividad(){
 	$valores=db_query("SELECT valoracion FROM `valoracion` where cod_act=:act",array('act'=>$nid))->fetchCol();
 	$total=0;
 	$i=0;
-	watchdog('valor',$valores);
-	foreach ($valores as $valor) {
+	//watchdog('valor',$valores);
+	foreach ($valores as $va) {
 		
 		$i++;
-		$total=$total+$valor;
+		$total=$total+$va;
 	}
 	$va=round($total/$i);
 	
 	$act=db_query("UPDATE `field_data_field_calificacion` SET `field_calificacion_value`=:va WHERE entity_id=:nid",array(':va'=>$va,':nid'=>$nid));
+	watchdog('valor',$act);
 }
 
 

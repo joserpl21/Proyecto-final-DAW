@@ -332,8 +332,11 @@ block-views-mejores-ejercicios-block-1 #block-views-mejores-ejercicios-block-1 h
   .view-comidas-vegetarianas .views-row {
     width: 100%;
   }
-  .view-ejericios .views-row {
+  #block-views-mejores-ejercicios-block-1 .views-row {
     width: 100%;
+  }
+  #player .html5-video-player {
+    width: 50%;
   }
 }
 #block-views-mejores-eventos-block-1 .views-row-last {
@@ -566,6 +569,18 @@ block-views-mejores-eventos-block-1 #block-views-mejores-eventos-block-1 h2 {
   .view-comidas-vegetarianas .views-row {
     width: 100%;
   }
+  .view-mejores-ejercicios .view-row {
+    width: 100%;
+  }
+  .view-ejericios .views-row {
+    width: 100%;
+  }
+  .html5-video-player {
+    width: 50%;
+  }
+  #player {
+    background-color: white;
+  }
 }
 .view-comidas-vegetarianas .views-row-last {
   margin-right: 0;
@@ -636,6 +651,12 @@ block-views-mejores-eventos-block-1 #block-views-mejores-eventos-block-1 h2 {
 @media (max-width: 400px) {
   .view-eventos .views-row {
     width: 100%;
+  }
+  .html5-video-player {
+    width: 50%;
+  }
+  #player {
+    background-color: white;
   }
 }
 .view-eventos .views-row-last {
